@@ -198,8 +198,9 @@ Env_GenerateCloneName(PFN pfnClone, CPFN pfnSource)
 {
    static FNCHAR path[4096];
    static FNCHAR tail[4096];
-   lstrcpy(tail,RSTR(CLONEOF)); // rstr() also inits pszCLONEOF
-   Filename_SplitPath(pfnSource,path,tail+lstrlen(pszCLONEOF));
+   //lstrcpy(tail,RSTR(CLONEOF)); // rstr() also inits pszCLONEOF
+   tail[0] = 0;
+   Filename_SplitPath(pfnSource,path,tail+lstrlen(tail));
    if (Filename_IsExtension(tail,"vhd") || Filename_IsExtension(tail,"vmdk") ||
        Filename_IsExtension(tail,"raw") || Filename_IsExtension(tail,"img")  ||
        Filename_IsExtension(tail,"hdd")) {
