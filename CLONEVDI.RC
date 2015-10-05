@@ -1,0 +1,579 @@
+/*================================================================================*/
+/* Copyright (C) 2009, Don Milne.                                                 */
+/* All rights reserved.                                                           */
+/* See LICENSE.TXT for conditions on copying, distribution, modification and use. */
+/*================================================================================*/
+
+/****************************************************************************
+clonevdi.rc
+*****************************************************************************/
+
+#ifndef WS_POPUP
+#include "winresrc.h"
+#endif
+#include "version.h"
+
+/* as used in progress.c */
+DLG_ALT_PROGRESS DIALOG 47, 52, 273, 122
+STYLE 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_THICKFRAME
+CAPTION "Cloning Virtual Hard Disk..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX "Progress", -1, 3, 1, 266, 52, BS_GROUPBOX
+ LTEXT "Cloning source virtual disk - please wait...", 300, 9, 13, 209, 8
+ CONTROL "%ld%%", 200, "SSCCThermo", 0 | WS_CHILD | WS_VISIBLE | WS_BORDER, 9, 24, 252, 12
+ LTEXT "filename goes here...", 201, 9, 39, 252, 8
+ GROUPBOX "Stats", -1, 4, 54, 266, 46, BS_GROUPBOX
+ LTEXT "Mbytes done:", -1, 9, 66, 49, 8
+ LTEXT "0", 202, 61, 66, 58, 8
+ LTEXT "Mbytes remaining:", -1, 122, 66, 63, 8
+ LTEXT "0", 203, 187, 66, 72, 8
+ LTEXT "Time elapsed:", -1, 9, 76, 49, 8
+ LTEXT "0s", 204, 61, 76, 58, 8
+ LTEXT "Time remaining:", -1, 121, 76, 63, 8
+ LTEXT "0s", 205, 187, 76, 64, 8
+ LTEXT "Data rate:", -1, 9, 86, 49, 8
+ LTEXT "0cps.", 206, 61, 86, 58, 8
+ PUSHBUTTON "Cancel", 2, 4, 105, 50, 14
+}
+
+/* as used in clonevdi.c */
+DLG_CLONEVDI DIALOG 171, 140, 365, 232
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Virtual HD Clone and Optimize v%lu.%02lX"
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX " Filenames ", -1, 3, 2, 354, 47, BS_GROUPBOX
+ LTEXT "Source:", -1, 9, 15, 59, 8
+ EDITTEXT 200, 71, 13, 233, 12, ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP
+ PUSHBUTTON "Browse...", 201, 307, 12, 45, 14, WS_GROUP | WS_TABSTOP
+ LTEXT "Destination:", -1, 9, 32, 60, 8
+ EDITTEXT 202, 71, 30, 233, 12, ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP
+ PUSHBUTTON "Browse...", 203, 307, 29, 45, 14, WS_GROUP | WS_TABSTOP
+ GROUPBOX " Source Drive Information ", -1, 3, 51, 354, 43, BS_GROUPBOX
+ LTEXT "Validation result:", -1, 9, 62, 61, 8, NOT WS_GROUP
+ LTEXT "Text", 204, 71, 61, 278, 12, NOT WS_GROUP | WS_BORDER
+ LTEXT "Drive size:", -1, 9, 77, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 205, 71, 76, 66, 12, NOT WS_GROUP | WS_BORDER
+ LTEXT "File system:", -1, 156, 77, 43, 8, NOT WS_GROUP
+ LTEXT "Text", 206, 202, 76, 147, 12, NOT WS_GROUP | WS_BORDER
+ GROUPBOX " Options ", -1, 3, 96, 354, 78, BS_GROUPBOX | WS_GROUP
+ AUTOCHECKBOX "Generate new UUID", 207, 9, 106, 95, 12
+ AUTOCHECKBOX "Keep old UUID", 208, 9, 118, 100, 12
+ AUTOCHECKBOX "Increase virtual drive size to", 209, 9, 130, 103, 12
+ EDITTEXT 210, 114, 130, 50, 12, WS_BORDER | WS_TABSTOP
+ AUTOCHECKBOX "Increase partition size", 211, 9, 142, 100, 12
+ AUTOCHECKBOX "Compact drive while copying", 212, 9, 154, 131, 12
+ GROUPBOX " About ", -1, 3, 177, 354, 26, BS_GROUPBOX | WS_GROUP
+ CTEXT "Virtual HD Clone Utility v%lu.%02lX. Copyright (c) %lu - Don Milne (aka mpack).", 213, 6, 187, 345, 8, SS_CENTER | NOT WS_GROUP
+ PUSHBUTTON "Partition &Info...", 300, 3, 211, 66, 14, WS_GROUP | WS_TABSTOP
+ PUSHBUTTON "&Header info...", 301, 72, 211, 66, 14, WS_GROUP | WS_TABSTOP
+ PUSHBUTTON "&Sector viewer...", 302, 140, 211, 66, 14, WS_GROUP | WS_TABSTOP
+ PUSHBUTTON "&Proceed", 1, 253, 211, 50, 14, WS_GROUP | WS_TABSTOP
+ DEFPUSHBUTTON "&Exit", 2, 306, 211, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+ LTEXT "(Keep this checked if you don't know what a UUID is!)", -1, 108,108,176,8
+}
+
+/* as used in partinfo.c */
+DLG_PARTINFO DIALOG 22, 31, 361, 116
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Virtual Disk Partition Information..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ LTEXT "Part-\nition", -1, 9, 14, 22, 16, NOT WS_GROUP
+ DEFPUSHBUTTON "&Close", 2, 150, 94, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+ LTEXT "CHS Address\nFirst sector", -1, 61, 14, 45, 16
+ LTEXT "Partition\nType", -1, 124, 14, 31, 16
+ LTEXT "CHS Address\nLast sector", -1, 162, 14, 61, 16
+ LTEXT "LBA Address\nFirst sector", -1, 233, 14, 48, 16
+ LTEXT "Number of\nSectors", -1, 290, 14, 48, 16
+ LTEXT "1", -1, 13, 39, 9, 8
+ LTEXT "2", -1, 13, 50, 9, 8
+ LTEXT "3", -1, 13, 61, 9, 8
+ LTEXT "4", -1, 13, 72, 9, 8
+ LTEXT "Boot-\nable?", -1, 32, 14, 24, 16
+ LTEXT "Y", 200, 36, 39, 11, 8
+ LTEXT "Y", 201, 55, 39, 64, 8
+ LTEXT "Y", 202, 124, 39, 24, 8
+ LTEXT "Y", 203, 158, 39, 68, 8
+ LTEXT "Y", 204, 232, 39, 54, 8
+ LTEXT "Y", 205, 290, 39, 54, 8
+ LTEXT "Y", 206, 36, 50, 11, 8
+ LTEXT "Y", 207, 55, 50, 64, 8
+ LTEXT "Y", 208, 124, 50, 24, 8
+ LTEXT "Y", 209, 158, 50, 68, 8
+ LTEXT "Y", 210, 232, 50, 54, 8
+ LTEXT "Y", 211, 290, 50, 54, 8
+ LTEXT "Y", 212, 36, 61, 11, 8
+ LTEXT "Y", 213, 55, 61, 64, 8
+ LTEXT "Y", 214, 124, 61, 24, 8
+ LTEXT "Y", 215, 158, 61, 68, 8
+ LTEXT "Y", 216, 232, 61, 54, 8
+ LTEXT "Y", 217, 290, 61, 54, 8
+ LTEXT "Y", 218, 36, 72, 11, 8
+ LTEXT "Y", 219, 55, 72, 64, 8
+ LTEXT "Y", 220, 124, 72, 24, 8
+ LTEXT "Y", 221, 158, 72, 68, 8
+ LTEXT "Y", 222, 232, 72, 54, 8
+ LTEXT "Y", 223, 290, 72, 54, 8
+ GROUPBOX " Partition Map ", -1, 3, 3, 353, 32, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 24, 83, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 50, 83, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 118, 83, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 150, 83, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 227, 83, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 284, 83, BS_GROUPBOX
+ GROUPBOX " Partition Map ", -1, 3, 3, 353, 83, BS_GROUPBOX
+}
+
+/* as used in showheader.c */
+DLG_VDI_HDR_INFO DIALOG 32, 23, 241, 256
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "VDI Header Information..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX " Pre-Header ", -1, 3, 3, 235, 45, BS_GROUPBOX
+ LTEXT "Info string:", -1, 9, 14, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 200, 72, 14, 163, 8, NOT WS_GROUP
+ DEFPUSHBUTTON "&Close", 2, 85, 239, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+ LTEXT "Signature word:", -1, 9, 24, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 201, 72, 24, 163, 8, NOT WS_GROUP
+ LTEXT "Format version:", -1, 9, 35, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 202, 72, 35, 163, 8, NOT WS_GROUP
+ GROUPBOX " Header ", -1, 3, 49, 235, 143, BS_GROUPBOX
+ LTEXT "Type:", -1, 9, 59, 41, 8, NOT WS_GROUP
+ LTEXT "Text", 203, 72, 59, 163, 8, NOT WS_GROUP
+ LTEXT "Flags:", -1, 9, 69, 41, 8, NOT WS_GROUP
+ LTEXT "Text", 204, 72, 69, 163, 8, NOT WS_GROUP
+ LTEXT "Legacy geometry:", -1, 9, 79, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 205, 72, 79, 163, 8, NOT WS_GROUP
+ LTEXT "Disk size:", -1, 9, 89, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 206, 72, 89, 163, 8, NOT WS_GROUP
+ LTEXT "Block size:", -1, 9, 99, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 207, 72, 99, 163, 8, NOT WS_GROUP
+ LTEXT "Block extra bytes:", -1, 9, 109, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 208, 72, 109, 163, 8, NOT WS_GROUP
+ LTEXT "Blocks total:", -1, 9, 119, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 209, 72, 119, 163, 8, NOT WS_GROUP
+ LTEXT "Blocks allocated:", -1, 9, 129, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 210, 72, 129, 163, 8, NOT WS_GROUP
+ LTEXT "UUID (create):", -1, 9, 139, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 211, 72, 139, 163, 8, NOT WS_GROUP
+ LTEXT "UUID (modify):", -1, 9, 149, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 212, 72, 149, 163, 8, NOT WS_GROUP
+ LTEXT "UUID (parent):", -1, 9, 159, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 213, 72, 159, 163, 8, NOT WS_GROUP
+ LTEXT "UUID (pmodify):", -1, 9, 169, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 214, 72, 169, 163, 8, NOT WS_GROUP
+ LTEXT "LCHS geometry:", -1, 9, 179, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 215, 72, 179, 163, 8, NOT WS_GROUP
+ GROUPBOX " Comment ", -1, 3, 192, 235, 43, BS_GROUPBOX
+ LTEXT "Text", 216, 9, 200, 225, 32, NOT WS_GROUP
+}
+
+/* as used in showheader.c */
+DLG_VHD_HDR_INFO DIALOG 34, 13, 241, 200
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "VHD Header Information..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX " Footer ", -1, 3, 3, 235, 103, BS_GROUPBOX
+ LTEXT "Cookie string:", -1, 9, 14, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 200, 72, 14, 163, 8, NOT WS_GROUP
+ DEFPUSHBUTTON "&Close", 2, 85, 181, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+ LTEXT "Feature flags:", -1, 9, 24, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 201, 72, 24, 163, 8, NOT WS_GROUP
+ LTEXT "Format version:", -1, 9, 34, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 202, 72, 34, 163, 8, NOT WS_GROUP
+ GROUPBOX " Dynamic Header ", -1, 3, 107, 235, 69, BS_GROUPBOX
+ LTEXT "Creator app:", -1, 9, 44, 54, 8, NOT WS_GROUP
+ LTEXT "Text", 203, 72, 44, 163, 8, NOT WS_GROUP
+ LTEXT "Creator OS:", -1, 9, 54, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 204, 72, 54, 163, 8, NOT WS_GROUP
+ LTEXT "Virtual size:", -1, 9, 64, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 205, 72, 64, 163, 8, NOT WS_GROUP
+ LTEXT "VHD type:", -1, 9, 73, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 206, 72, 73, 163, 8, NOT WS_GROUP
+ LTEXT "UUID (create):", -1, 9, 83, 60, 8, NOT WS_GROUP
+ LTEXT "Text", 207, 72, 83, 163, 8, NOT WS_GROUP
+ LTEXT "Saved state flag:", -1, 9, 92, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 208, 72, 92, 163, 8, NOT WS_GROUP
+ LTEXT "Blocks total:", -1, 9, 119, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 209, 72, 119, 163, 8, NOT WS_GROUP
+ LTEXT "Blocks allocated:", -1, 9, 129, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 210, 72, 129, 163, 8, NOT WS_GROUP
+ LTEXT "Dyn header ver:", -1, 9, 139, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 211, 72, 139, 163, 8, NOT WS_GROUP
+ LTEXT "Block size:", -1, 9, 149, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 212, 72, 149, 163, 8, NOT WS_GROUP
+ LTEXT "UUID (parent):", -1, 9, 159, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 213, 72, 159, 163, 8, NOT WS_GROUP
+}
+
+/* as used in showheader.c */
+DLG_HDD_HDR_INFO DIALOG 58, 37, 188, 108
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "HDD Header Information..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX " Header ", -1, 3, 3, 182, 77, BS_GROUPBOX
+ LTEXT "Info string:", -1, 9, 14, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 200, 72, 14, 107, 8, NOT WS_GROUP
+ DEFPUSHBUTTON "&Close", 2, 60, 87, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+ LTEXT "Format version:", -1, 9, 24, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 201, 72, 24, 107, 8, NOT WS_GROUP
+ LTEXT "Geometry:", -1, 9, 34, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 202, 72, 34, 107, 8, NOT WS_GROUP
+ LTEXT "Block size:", -1, 9, 44, 54, 8, NOT WS_GROUP
+ LTEXT "Text", 203, 72, 44, 107, 8, NOT WS_GROUP
+ LTEXT "Blocks total:", -1, 9, 54, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 204, 72, 54, 107, 8, NOT WS_GROUP
+ LTEXT "Virtual size:", -1, 9, 64, 63, 8, NOT WS_GROUP
+ LTEXT "Text", 205, 72, 64, 107, 8, NOT WS_GROUP
+}
+
+/* as used in showheader.c */
+DLG_VMDK_HDR_INFO DIALOG 15, 27, 424, 209
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "VMDK Header Information..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX " Descriptor ", -1, 3, 3, 416, 73, BS_GROUPBOX
+ LTEXT "Version:", -1, 9, 13, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 200, 72, 13, 138, 8, NOT WS_GROUP
+ LTEXT "Disk signature:", -1, 9, 23, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 201, 72, 23, 138, 8, NOT WS_GROUP
+ LTEXT "Parent signature:", -1, 9, 33, 59, 8, NOT WS_GROUP
+ LTEXT "Text", 202, 72, 33, 138, 8, NOT WS_GROUP
+ LTEXT "Disk type:", -1, 9, 43, 41, 8, NOT WS_GROUP
+ LTEXT "Text", 203, 72, 43, 138, 8, NOT WS_GROUP
+ LTEXT "UUID:", -1, 9, 53, 41, 8, NOT WS_GROUP
+ LTEXT "Text", 204, 72, 53, 170, 8, NOT WS_GROUP
+ LTEXT "nExtents:", -1, 9, 63, 41, 8, NOT WS_GROUP
+ LTEXT "Text", 205, 72, 63, 138, 8, NOT WS_GROUP
+ GROUPBOX " Extents ", -1, 3, 77, 417, 106, BS_GROUPBOX
+ LTEXT "-------------Blocks--------------", -1, 141, 84, 78, 8
+ LTEXT "Access", -1, 9, 94, 27, 8
+ LTEXT "Type", -1, 40, 94, 23, 8
+ LTEXT "Sectors", -1, 72, 94, 30, 8
+ LTEXT "Offset", -1, 112, 94, 24, 8
+ LTEXT "Size", -1, 140, 94, 22, 8
+ LTEXT "nTotal", -1, 165, 94, 25, 8
+ LTEXT "nAlloc", -1, 195, 94, 30, 8
+ LTEXT "File", -1, 225, 94, 30, 8
+ LTEXT "rdonly", 206, 9, 106, 30, 8
+ LTEXT "sparse", 207, 40, 106, 30, 8
+ LTEXT "4193792", 208, 72, 106, 38, 8
+ LTEXT "0", 209, 112, 106, 17, 8
+ LTEXT "0", 210, 140, 106, 20, 8
+ LTEXT "0", 211, 165, 106, 24, 8
+ LTEXT "0", 212, 195, 106, 25, 8
+ LTEXT "Text", 213, 225, 106, 192, 8, NOT WS_GROUP
+ DEFPUSHBUTTON "&Close", 2, 175, 189, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+ LTEXT "rdonly", 214, 9, 115, 30, 8
+ LTEXT "sparse", 215, 40, 115, 30, 8
+ LTEXT "4193792", 216, 72, 115, 38, 8
+ LTEXT "0", 217, 112, 115, 17, 8
+ LTEXT "0", 218, 140, 115, 20, 8
+ LTEXT "0", 219, 165, 115, 24, 8
+ LTEXT "0", 220, 195, 115, 25, 8
+ LTEXT "Text", 221, 225, 115, 192, 8, NOT WS_GROUP
+ LTEXT "rdonly", 222, 9, 124, 30, 8
+ LTEXT "sparse", 223, 40, 124, 30, 8
+ LTEXT "4193792", 224, 72, 124, 38, 8
+ LTEXT "0", 225, 112, 124, 17, 8
+ LTEXT "0", 226, 140, 124, 20, 8
+ LTEXT "0", 227, 165, 124, 24, 8
+ LTEXT "0", 228, 195, 124, 25, 8
+ LTEXT "Text", 229, 225, 124, 192, 8, NOT WS_GROUP
+ LTEXT "rdonly", 230, 9, 133, 30, 8
+ LTEXT "sparse", 231, 40, 133, 30, 8
+ LTEXT "4193792", 232, 72, 133, 38, 8
+ LTEXT "0", 233, 112, 133, 17, 8
+ LTEXT "0", 234, 140, 133, 20, 8
+ LTEXT "0", 235, 165, 133, 24, 8
+ LTEXT "0", 236, 195, 133, 25, 8
+ LTEXT "Text", 237, 225, 133, 192, 8, NOT WS_GROUP
+ LTEXT "rdonly", 238, 9, 142, 30, 8
+ LTEXT "sparse", 239, 40, 142, 30, 8
+ LTEXT "4193792", 240, 72, 142, 38, 8
+ LTEXT "0", 241, 112, 142, 17, 8
+ LTEXT "0", 242, 140, 142, 20, 8
+ LTEXT "0", 243, 165, 142, 24, 8
+ LTEXT "0", 244, 195, 142, 25, 8
+ LTEXT "Text", 245, 225, 142, 192, 8, NOT WS_GROUP
+ LTEXT "rdonly", 246, 9, 151, 30, 8
+ LTEXT "sparse", 247, 40, 151, 30, 8
+ LTEXT "4193792", 248, 72, 151, 38, 8
+ LTEXT "0", 249, 112, 151, 17, 8
+ LTEXT "0", 250, 140, 151, 20, 8
+ LTEXT "0", 251, 165, 151, 24, 8
+ LTEXT "0", 252, 195, 151, 25, 8
+ LTEXT "Text", 253, 225, 151, 192, 8, NOT WS_GROUP
+ LTEXT "rdonly", 254, 9, 160, 30, 8
+ LTEXT "sparse", 255, 40, 160, 30, 8
+ LTEXT "4193792", 256, 72, 160, 38, 8
+ LTEXT "0", 257, 112, 160, 17, 8
+ LTEXT "0", 258, 140, 160, 20, 8
+ LTEXT "0", 259, 165, 160, 24, 8
+ LTEXT "0", 260, 195, 160, 25, 8
+ LTEXT "Text", 261, 225, 160, 192, 8, NOT WS_GROUP
+ LTEXT "rdonly", 262, 9, 169, 30, 8
+ LTEXT "sparse", 263, 40, 169, 30, 8
+ LTEXT "4193792", 264, 72, 169, 38, 8
+ LTEXT "0", 265, 112, 169, 17, 8
+ LTEXT "0", 266, 140, 169, 20, 8
+ LTEXT "0", 267, 165, 169, 24, 8
+ LTEXT "0", 268, 195, 169, 25, 8
+ LTEXT "Text", 269, 225, 169, 192, 8, NOT WS_GROUP
+}
+
+/* as used in SectorViewer.c */
+DLG_WRITE_SECTORS DIALOG 12, 22, 365, 110
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Write sectors to file..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ GROUPBOX " Filenames ", -1, 3, 2, 354, 77, BS_GROUPBOX
+ LTEXT "Start sector:", -1, 9, 15, 67, 8
+ EDITTEXT 200, 84, 13, 59, 12, ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP
+ LTEXT "Number of sectors:", -1, 9, 33, 71, 8
+ EDITTEXT 201, 84, 31, 59, 12, ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP
+ LTEXT "Filename:", -1, 9, 50, 60, 8
+ EDITTEXT 202, 84, 48, 220, 12, ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP
+ PUSHBUTTON "Browse...", 203, 307, 47, 45, 14, WS_GROUP | WS_TABSTOP
+ PUSHBUTTON "&Proceed", 1, 251, 86, 50, 14, WS_GROUP | WS_TABSTOP
+ DEFPUSHBUTTON "&Cancel", 2, 305, 86, 50, 14, BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP
+}
+
+/* as used in SectorViewer.c */
+DLG_ALT_SECTOR_VIEWER DIALOG -4, 6, 519, 242
+STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Sector Viewer..."
+FONT 8, "MS Sans Serif"
+LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
+{
+ LTEXT "Sector:", 100, 5, 3, 131, 8, NOT WS_GROUP
+ CONTROL "", 200, "SSCCHexView", 0 | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 5, 14, 498, 191
+ SCROLLBAR 102, 503, 14, 12, 191, SBS_VERT | WS_GROUP
+ PUSHBUTTON "Write sectors to file...", 300, 5, 218, 103, 14, WS_GROUP | WS_TABSTOP
+ RTEXT "Go to sector:", 400, 117, 221, 57, 8
+ EDITTEXT 103, 177, 219, 52, 12, WS_BORDER | WS_TABSTOP
+ PUSHBUTTON "Go", 301, 230, 218, 22, 14, WS_GROUP | WS_TABSTOP
+ PUSHBUTTON "View as MBR", 302, 282, 218, 55, 14, WS_GROUP | WS_TABSTOP
+ PUSHBUTTON "Close", 1, 463, 218, 50, 14, WS_GROUP | WS_TABSTOP
+ LTEXT "Offset:", 101, 138, 3, 65, 8, NOT WS_GROUP
+}
+
+APP_ICON ICON "resource/CloneVDI.ico"
+MBR_TEMPLATE RCDATA "resource/mbr.bin"
+
+1 VERSIONINFO 
+FILEVERSION MAJOR_VER_DECIMAL , MINOR_VER_DECIMAL , 0, 0
+PRODUCTVERSION MAJOR_VER_DECIMAL , MINOR_VER_DECIMAL , 0, 0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "Author", "Don Milne (mpack@forums.virtualbox.org)\000\000"
+   VALUE "FileDescription", "Virtual Disk Copy and Optimize Tool\000"
+   VALUE "FileVersion", SOFTWARE_VERSION_STR
+   VALUE "InternalName", "CloneVDI\000"
+   VALUE "LegalCopyright", COPYRIGHT_STR
+   VALUE "OriginalFilename", "clonevdi.exe\000"
+  }
+
+ }
+
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x809, 1252
+ }
+
+}
+LANGUAGE LANG_ENGLISH,SUBLANG_ENGLISH_UK
+
+#include "ids.h"
+
+STRINGTABLE 
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+{
+   /* General */
+   IDS_OK,              "Ok"
+   IDS_NONE,            "None"
+   IDS_ERROR,           "Error"
+   IDS_UNKERROR,        "Unknown Error"
+   IDS_NOYES,           "NY"
+   
+   /* dialog resource names, should match dialog templates defined above */
+   IDS_DLG_CLONEVDI,          "DLG_CLONEVDI"
+   IDS_DLG_ALT_PROGRESS,      "DLG_ALT_PROGRESS"
+   IDS_DLG_PARTINFO,          "DLG_PARTINFO"
+   IDS_DLG_VDI_HDR_INFO,      "DLG_VDI_HDR_INFO"
+   IDS_DLG_VHD_HDR_INFO,      "DLG_VHD_HDR_INFO"
+   IDS_DLG_HDD_HDR_INFO,      "DLG_HDD_HDR_INFO"
+   IDS_DLG_VMDK_HDR_INFO,     "DLG_VMDK_HDR_INFO"
+   IDS_DLG_WRITE_SECTORS,     "DLG_WRITE_SECTORS"
+   IDS_DLG_ALT_SECTOR_VIEWER, "DLG_ALT_SECTOR_VIEWER"
+
+   /* CloneVDI.c */
+   IDS_SELECT_SOURCE,   "Select source file..."
+   IDS_SRCFILEFILTER,   "Virtual drive files\000*.vdi;*.vhd;*.vmdk;*.raw;*.img;*.hdd\000\000"
+   IDS_SELECT_DEST,     "Select destination filename..."
+   IDS_DSTFILEFILTER,   "Virtual drive files\000*.vdi\000\000"
+   IDS_UNKNOWNFS,       "Unknown (%02lx)"
+   IDS_PLSSELSRC,       "Please select a source virtual disk"
+   IDS_NOSRC,           "Cannot proceed - source file does not exist!"
+   IDS_ERRAPPWND,       "Could not create app window (error x%x)"
+
+   /* Clone.c */
+   IDS_LOMEM,           "Low memory! Could not allocate copy buffer!"
+   IDS_FINDINGUSEDBLKS, "Finding used blocks in partitions - please wait..."
+   IDS_CLONINGVHD,      "Cloning Virtual Hard Disk..."
+   IDS_CLONEWAIT,       "Cloning virtual disk - please wait..."
+   IDS_USERABORT,       "Aborted by user"
+   IDS_ORIGINAL,        "Original "
+   IDS_SNAPSHOT,        "Source is a difference image. Sorry, this tool cannot clone these (for now)"
+   IDS_SIZEERR2,        "The new drive size must be a number followed by 'GB' or 'MB' to indicate the size range"
+   IDS_SIZEERR3,        "Bad number format, or number too large, in new drive size field"
+   IDS_SIZEERR4,        "The new drive size must be at least as large as the old drive size"
+   IDS_SIZEERR5,        "This utility cannot create virtual drives larger than 2047.00 GB"
+   IDS_BADNUM,          "Bad number in new drive size field"
+   IDS_ERRRENAME,       "Could not rename old VDI - a backup file of the intended name already exists! Therefore the clone will keep its temp filename of '%s'"
+
+   /* cmdline.c */
+   IDS_USAGE00,         "\015\012Usage: CloneVDI <source file name> {options}\015\012"
+   IDS_USAGE01,         "\015\012"
+   IDS_USAGE02,         "Option Name       Effect\015\012"
+   IDS_USAGE03,         "-----------       ------\015\012"
+   IDS_USAGE04,         "-o or --output    Sets output filename. A filename should\015\012"
+   IDS_USAGE05,         "                  follow as next argument. Dest filename\015\012"
+   IDS_USAGE06,         "                  defaults to 'Clone of '+<source>\015\012"
+   IDS_USAGE07,         "-k or --keepuuid  Dest file inherits UUID from source.\015\012"
+   IDS_USAGE08,         "                  Default is to generate a new UUID.\015\012"
+   IDS_USAGE09,         "-e or --enlarge   Enlarges drive max size. Intended size\015\012"
+   IDS_USAGE10,         "                  should be provided as next argument,\015\012"
+   IDS_USAGE11,         "                  e.g. 256.00MB, 64.00GB.\015\012"
+   IDS_USAGE12,         "-r or --repart    Enlarge main partition (ignored unless\015\012"
+   IDS_USAGE13,         "                  --enlarge option also set).\015\012"
+   IDS_USAGE14,         "-c or --compact   Enables compaction feature (supported\015\012"
+   IDS_USAGE15,         "                  guest filesystems only).\015\012"
+   IDS_USAGE16,         "-h or --help      Displays this usage information.\015\012"
+   IDS_USAGE17,         "\015\012"
+   IDS_USAGE18,         "Options can be grouped, eg. -kce or --keepuuid+enlarge. Option\015\012"
+   IDS_USAGE19,         "parameters should follow, in the same order as the group.\015\012"
+   IDS_BANNER0,         "\015\012CloneVDI %lu.%02lx\015\012"
+   IDS_BANNER1,         "Copyright (C) %lu, Don Milne\015\012"
+   IDS_BANNER2,         "Feedback to: mpack on forums.virtualbox.org\015\012"
+   IDS_ARGERR,          "Error in argument %lu: %s.\015\012"
+   IDS_OPTTWICE,        "Error in argument %lu: %s option specified twice.\015\012"
+   IDS_NOFILEN,         "output option specified, no filename provided"
+   IDS_NODSIZE,         "enlarge option specified, no disk size provided"
+   IDS_UNKOPT,          "unknown option."
+   IDS_INVOPT,          "Invalid option format (embedded space?)"
+   IDS_SRCTWICE,        "Source name given twice? Dest file should be specified using --output <fn> option"
+   IDS_NEEDSRC,         "Source filename is missing"
+   IDS_VOPTOUTPUT,      "output"   /* these are the command line option verbose names ... */
+   IDS_VOPTKEEPUUID,    "keepuuid" /* ... stored here so they can be localised too... */
+   IDS_VOPTENLARGE,     "enlarge"
+   IDS_VOPTCOMPACT,     "compact"
+   IDS_VOPTHELP,        "help"
+   IDS_CHAROPT,         "okech"    /* command line options single char names (char index decides which option it is) ... */
+
+   /* env.c */
+   IDS_CLONEOF,         "Clone of "
+
+   /* SectorViewer.c */
+   IDS_SVOFFSET,        "Offset = %lu"
+   IDS_SVSECTOR,        "Sector %lu of %lu"
+   IDS_SVDESTFN,        "Select destination filename..."
+   IDS_SVBINFLT,        "Binary files\000*.bin\000\000"
+   IDS_SVPEVALSS,       "Please enter a valid start sector"
+   IDS_SVPEVALSW,       "Please enter a valid number of sectors to write"
+   IDS_SVNOSPACE,       "Not enough free space in target folder"
+   IDS_SVINVPATH,       "Invalid path"
+   IDS_SVACCDEN,        "Write access was denied"
+   IDS_SVWRPROT,        "Target drive is write protected"
+   IDS_SVOVERWR,        "Destination already exists. Are you sure you want to overwrite it?"
+   IDS_SVEXISTS,        "File Exists"
+   IDS_SVLOWMEM,        "Low memory! Could not allocate copy buffer!"
+   IDS_SVWRSECT,        "Writing sectors - please wait..."
+   IDS_SVPRCAPT,        "Writing sectors..."
+   IDS_SVWRERR,         "Write error!"
+   IDS_SVABORT,         "Aborted by user"
+
+   /* ShowHeader.c */
+   IDS_DYNAMIC,         "Dynamic"
+   IDS_FIXED,           "Fixed"
+   IDS_UNDO,            "Undo"
+   IDS_DIFFERENCING,    "Differencing"
+   IDS_SET,             "Set"
+   IDS_NOTSET,          "Not set"
+   IDS_NOTSPEC,         "Not specified"
+   IDS_ACCTYPE0,        "?"
+   IDS_ACCTYPE1,        "RW"
+   IDS_ACCTYPE2,        "RdOnly"
+   IDS_ACCTYPE3,        "None"
+   IDS_EXTTYPE0,        "?"
+   IDS_EXTTYPE1,        "Flat"
+   IDS_EXTTYPE2,        "Sparse"
+   IDS_EXTTYPE3,        "Zero"
+
+   /* generic error messages for VxxxR (source file format handler) modules */
+   IDS_VDNOEXIST,       "The source file does not exist"
+   IDS_VDERRSHARE,      "Source file already in use (is VirtualBox running?)"
+   IDS_VDERRREAD,       "Got OS error %lu when reading from source file"
+   IDS_VDNOTVDI,        "Source file is not a recognized VDI file format"
+   IDS_VDNOTVHD,        "Source file is not a recognized VHD file format"
+   IDS_VDNOTVMDK,       "Source file is not a recognized VMDK file format"
+   IDS_VDNOTHDD,        "Source file is not a recognized HDD file format"
+   IDS_VDINVHANDLE,     "Invalid handle passed to VDx source object"
+   IDS_VDNOMEM,         "Not enough memory to map source file"
+   IDS_VDSEEKRANGE,     "App attempted to seek beyond end of drive!"
+   IDS_VDERRFMT,        "Source has strange format which is incompatible with this tool"
+   IDS_VDERRSEEK,       "Got OS error %lu when seeking inside source file"
+   IDS_VDBLKMAP,        "Source file corrupt - block map contains errors"
+   IDS_VDNODESC,        "VMDK incomplete - disk descriptor not found"
+   IDS_VDINVDESC,       "Invalid VMDK disk descriptor"
+   IDS_VDBADVER,        "VMDK version number was not recognized"
+   IDS_VDMISSING,       "Required parameters are missing from the VMDK descriptor"
+   IDS_VDERRCOMP,       "Compressed VMDKs are not currently supported"
+   IDS_VDNOEXTENT,      "A descriptor referenced extent file is missing (renamed?)"
+
+   /* vdiw.c */
+   IDS_VWERRPATH,       "Destination path does not exist"
+   IDS_VWEXISTS,        "Destination file already exists"
+   IDS_VWNOSPACE,       "Not enough free space on destination drive"
+   IDS_VWWRPROT,        "Dest drive is write protected"
+   IDS_VWACCDEN,        "Access to dest drive was denied"
+   IDS_VWNOMEM,         "Not enough memory"
+   IDS_VWWRERR,         "Drive write error"
+   IDS_VWBLOCK,         "Attempted block write past end of virtual disk"
+   IDS_VWEXISTSQ,       "Destination already exists. Are you sure you want to overwrite it?"
+   IDS_VWEXISTSC,       "File Exists"
+}
+
+#include "resource/dutch.rc"
+#include "resource/german.rc"
+#include "resource/french.rc"
+
+LANGUAGE LANG_NEUTRAL,SUBLANG_NEUTRAL
+
+DLG_FOPEN_CUSTOM DIALOG 6, 15, 220, 50
+STYLE WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_BORDER | DS_3DLOOK | DS_CONTROL
+FONT 8, "MS Sans Serif"
+{
+ LTEXT "This is a test of showing custom text in a file-open dialog box.", -1, 12, 8, 194, 32
+}
+
