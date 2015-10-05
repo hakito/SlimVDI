@@ -545,9 +545,9 @@ BlockStatus(PVDI pVDI, HUGE LBA_start, HUGE LBA_end)
       if (SID>=pVDI->hdr.nBlocks) break;
       blks = pVDI->blockmap[SID];
       if (blks==VDI_PAGE_FREE && pVDI->hVDIparent) {
-         //blks = pVDI->hVDIparent->BlockStatus(pVDI->hVDIparent,LBA_start,LBA_end);
-         //if (blks==VDDR_RSLT_NORMAL) return blks;
-         //if (blks==VDDR_RSLT_BLANKPAGE) rslt = blks;
+         blks = pVDI->hVDIparent->BlockStatus(pVDI->hVDIparent,LBA_start,LBA_end);
+         if (blks==VDDR_RSLT_NORMAL) return blks;
+         if (blks==VDDR_RSLT_BLANKPAGE) rslt = blks;
       } else {
          if (VDI_BLOCK_ALLOCATED(blks)) return VDDR_RSLT_NORMAL;
          if (blks==VDI_PAGE_ZERO) rslt = VDDR_RSLT_BLANKPAGE;

@@ -161,13 +161,15 @@ IsBlockUsed(UINT iPage, UINT nMappedParts)
 /*.....................................................*/
 
 static UINT
-CountUsedBlocks(UINT nMappedParts, UINT dst_nBlocks)
+CountUsedBlocks(UINT nMappedParts, UINT dst_nBlocks, BOOL nomerge)
 {
    UINT iPage,nUsedBlocks=0;
    UINT blkstat;
    HUGE LBA = 0;
 
    for (iPage=0; iPage<dst_nBlocks; iPage++) {
+	  if (nomerge && SourceDisk->IsInheritedPage(SourceDisk, iPage))
+		  continue;
       blkstat = SourceDisk->BlockStatus(SourceDisk,LBA,LBA+(SECTORS_PER_BLOCK-1));
       LBA += (SECTORS_PER_BLOCK);
       if (blkstat==VDDR_RSLT_NORMAL) {
@@ -215,10 +217,9 @@ DoClone(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
 
    for (iPage=iBurst=0; iPage<nPages; iPage++) { // iPage a.k.a. block number.
 
-      if (!SourceDisk->IsInheritedPage(SourceDisk,iPage) && IsBlockUsed(iPage,parm->nMappedParts))
+	  blkstat = VDDR_RSLT_NOTALLOC;
+	  if (!(parm->flags & PARM_FLAG_NOMERGE && SourceDisk->IsInheritedPage(SourceDisk, iPage)) && IsBlockUsed(iPage, parm->nMappedParts))
          blkstat = SourceDisk->ReadPage(SourceDisk,block,iPage,SPB_SHIFT);
-      else
-         blkstat = VDDR_RSLT_NOTALLOC;
 
       BlockStatus[iBurst] = blkstat;
       if (blkstat==VDDR_RSLT_FAIL) {
@@ -454,7 +455,7 @@ Clone_Proceed(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
    // get used/unused cluster maps for partitions on source drive.
    SourceDisk->ReadSectors(SourceDisk, parm->MBR, 0, 1); // read MBR sector.
    nMappedParts = MapPartitions(pFSys,parm);
-   dst_nBlocksAllocated = CountUsedBlocks(nMappedParts, dst_nBlocks);
+   dst_nBlocksAllocated = CountUsedBlocks(nMappedParts, dst_nBlocks, parm->flags & PARM_FLAG_NOMERGE);
 
    // Create the dest VDI.
    hVDIdst = VDIW_Create(szfnDest,BLOCK_SIZE,dst_MaxBlocks,dst_nBlocksAllocated);
