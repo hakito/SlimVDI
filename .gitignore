@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+*.suo
+Debug/
+*.ilk
+*.pdb
