@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5F353895-5313-4A1A-BB98-6E7F8452FF78}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Obj\</IntDir>
+    <LinkIncremental />
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_X86_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling />
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>4Bytes</StructMemberAlignment>
+      <PrecompiledHeader />
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_X86_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling />
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StructMemberAlignment>4Bytes</StructMemberAlignment>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <PrecompiledHeader />
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat />
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="clone.h" />
+    <ClInclude Include="cmdline.h" />
+    <ClInclude Include="cow.h" />
+    <ClInclude Include="djfile.h" />
+    <ClInclude Include="djstring.h" />
+    <ClInclude Include="djtypes.h" />
+    <ClInclude Include="enlarge.h" />
+    <ClInclude Include="env.h" />
+    <ClInclude Include="ext2_struct.h" />
+    <ClInclude Include="extx.h" />
+    <ClInclude Include="fat.h" />
+    <ClInclude Include="filename.h" />
+    <ClInclude Include="fsys.h" />
+    <ClInclude Include="hddr.h" />
+    <ClInclude Include="HexView.h" />
+    <ClInclude Include="ids.h" />
+    <ClInclude Include="MediaReg.h" />
+    <ClInclude Include="mem.h" />
+    <ClInclude Include="memfile.h" />
+    <ClInclude Include="ntfs.h" />
+    <ClInclude Include="ntfs_struct.h" />
+    <ClInclude Include="parallels.h" />
+    <ClInclude Include="parms.h" />
+    <ClInclude Include="partinfo.h" />
+    <ClInclude Include="profile.h" />
+    <ClInclude Include="progress.h" />
+    <ClInclude Include="random.h" />
+    <ClInclude Include="SectorViewer.h" />
+    <ClInclude Include="showheader.h" />
+    <ClInclude Include="thermo.h" />
+    <ClInclude Include="unpart.h" />
+    <ClInclude Include="vddr.h" />
+    <ClInclude Include="vdir.h" />
+    <ClInclude Include="vdistructs.h" />
+    <ClInclude Include="vdiw.h" />
+    <ClInclude Include="version.h" />
+    <ClInclude Include="vhdr.h" />
+    <ClInclude Include="vhdstructs.h" />
+    <ClInclude Include="vmdkr.h" />
+    <ClInclude Include="vmdkstructs.h" />
+    <ClInclude Include="winresrc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="slimvdi.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="clone.c" />
+    <ClCompile Include="cmdline.c" />
+    <ClCompile Include="cow.c" />
+    <ClCompile Include="djfile.c" />
+    <ClCompile Include="djstring.c" />
+    <ClCompile Include="Enlarge.c" />
+    <ClCompile Include="env.c" />
+    <ClCompile Include="extx.c" />
+    <ClCompile Include="fat.c" />
+    <ClCompile Include="filename.c" />
+    <ClCompile Include="fsys.c" />
+    <ClCompile Include="hddr.c" />
+    <ClCompile Include="hexview.c" />
+    <ClCompile Include="MediaReg.c" />
+    <ClCompile Include="mem.c" />
+    <ClCompile Include="memfile.c" />
+    <ClCompile Include="ntfs.c" />
+    <ClCompile Include="partinfo.c" />
+    <ClCompile Include="profile.c" />
+    <ClCompile Include="progress.c" />
+    <ClCompile Include="Random.c" />
+    <ClCompile Include="SectorViewer.c" />
+    <ClCompile Include="showheader.c" />
+    <ClCompile Include="SlimVDI.c" />
+    <ClCompile Include="thermo.c" />
+    <ClCompile Include="unpart.c" />
+    <ClCompile Include="vddr.c" />
+    <ClCompile Include="vdir.c" />
+    <ClCompile Include="vdiw.c" />
+    <ClCompile Include="vhdr.c" />
+    <ClCompile Include="vmdkr.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SlimVDI.def" />
+    <None Include="VTune\SlimVDI.vpj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="SlimVDI.manifest" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

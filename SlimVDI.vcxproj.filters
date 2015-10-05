@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="djfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="djstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="djtypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enlarge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="env.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext2_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="filename.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fsys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hddr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HexView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ids.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaReg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ntfs_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parallels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="partinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="profile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="progress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SectorViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="showheader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thermo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="unpart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vddr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vdir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vdistructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vdiw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vhdr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vhdstructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vmdkr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vmdkstructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winresrc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="slimvdi.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="clone.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimVDI.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cow.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="djfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="djstring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enlarge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="env.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filename.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fsys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hddr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hexview.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaReg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ntfs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="partinfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="profile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="progress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SectorViewer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="showheader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thermo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unpart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vddr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vdir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vdiw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vhdr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vmdkr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SlimVDI.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="VTune\SlimVDI.vpj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="SlimVDI.manifest">
+      <Filter>Source Files</Filter>
+    </Manifest>
+  </ItemGroup>
+</Project>
