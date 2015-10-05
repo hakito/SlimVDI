@@ -482,6 +482,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int nCmdSh
       AttachConsole(ATTACH_PARENT_PROCESS);
       rslt = 1;
       if (CmdLine_Parse(&parm)) {
+         VDDR_OpenMediaRegistry(parm.srcfn);
          if (DoItForHeavensSake(NULL)) rslt = 0;
       }
    }
