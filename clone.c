@@ -286,6 +286,7 @@ static BOOL
 IsSnapshot(HVDDR SourceDisk)
 {
    if (SourceDisk->IsSnapshot(SourceDisk)) {
+      Error(RSTR(SNAPSHOT));
       return TRUE;
    }
    return FALSE;
@@ -429,7 +430,7 @@ Clone_Proceed(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
 
    SourceDisk = VDDR_Open(szfnSrc,0);
    if (!SourceDisk) return Error(VDDR_GetErrorString(0xFFFFFFFF));
-   if (!DestSizeOK(SourceDisk,parm)) {
+   if (IsSnapshot(SourceDisk) || !DestSizeOK(SourceDisk,parm)) {
       SourceDisk->Close(SourceDisk);
       return FALSE;
    }
