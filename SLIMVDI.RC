@@ -1452,9 +1452,9 @@ END
 STRINGTABLE
 BEGIN
     IDS_SELECT_SOURCE       "Quelldatei auswaehlen..."
-    IDS_SRCFILEFILTER       "virtuelle Laufwerksdateien"
+    IDS_SRCFILEFILTER       "virtuelle Laufwerksdateien\0*.vdi;*.vhd;*.vmdk;*.raw;*.img\0\0"
     IDS_SELECT_DEST         "Zieldateinamen auswaehlen..."
-    IDS_DSTFILEFILTER       "virtuelle Laufwerksdateien"
+    IDS_DSTFILEFILTER       "virtuelle Laufwerksdateien\0*.vdi\0\0"
     IDS_UNKNOWNFS           "Unbekannt (%02lx)"
     IDS_PLSSELSRC           "Bitte ein virtuelles Quelllaufwerk auswaehlen"
     IDS_NOSRC               "Kann nicht fortfahren - Quelldatei existiert nicht!"
@@ -1670,9 +1670,9 @@ END
 STRINGTABLE
 BEGIN
     IDS_SELECT_SOURCE       "Selectionnez le fichier source..."
-    IDS_SRCFILEFILTER       "Fichiers de disque virtuel"
+    IDS_SRCFILEFILTER       "Fichiers de disque virtuel\0*.vdi;*.vhd;*.vmdk;*.raw;*.img\0\0"
     IDS_SELECT_DEST         "Selectionnez le fichier destination..."
-    IDS_DSTFILEFILTER       "Fichiers de disque virtuel"
+    IDS_DSTFILEFILTER       "Fichiers de disque virtuel\0*.vdi\0\0"
     IDS_UNKNOWNFS           "Inconnu (%02lx)"
     IDS_PLSSELSRC           "Veuillez selectionner un disque virtuel source"
     IDS_NOSRC               "Impossible de continuer - le fichier source n'existe pas!"
@@ -1888,9 +1888,9 @@ END
 STRINGTABLE
 BEGIN
     IDS_SELECT_SOURCE       "Kies bron bestand..."
-    IDS_SRCFILEFILTER       "Virtuele harde schijf bestanden"
+    IDS_SRCFILEFILTER       "Virtuele harde schijf bestanden\0*.vdi;*.vhd;*.vmdk;*.raw;*.img\0\0"
     IDS_SELECT_DEST         "Kies een bestemmingsnaam..."
-    IDS_DSTFILEFILTER       "Virtuele harde schijf bestanden"
+    IDS_DSTFILEFILTER       "Virtuele harde schijf bestanden\0*.vdi\0\0"
     IDS_UNKNOWNFS           "Onbekend (%02lx)"
     IDS_PLSSELSRC           "Kies een virtuele harde schijf als bron"
     IDS_NOSRC               "Door gaan onmogelijk - bron bestand bestaat niet!"
@@ -2106,9 +2106,9 @@ END
 STRINGTABLE
 BEGIN
     IDS_SELECT_SOURCE       "Select source file..."
-    IDS_SRCFILEFILTER       "Virtual drive files"
+    IDS_SRCFILEFILTER       "Virtual drive files\0*.vdi;*.vhd;*.vmdk;*.raw;*.img\0\0"
     IDS_SELECT_DEST         "Select destination filename..."
-    IDS_DSTFILEFILTER       "Virtual drive files"
+    IDS_DSTFILEFILTER       "Virtual drive files\0*.vdi\0\0"
     IDS_UNKNOWNFS           "Unknown (%02lx)"
     IDS_PLSSELSRC           "Please select a source virtual disk"
     IDS_NOSRC               "Cannot proceed - source file does not exist!"
