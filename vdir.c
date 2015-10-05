@@ -17,7 +17,7 @@
 PUBLIC PSTR pszVdiInfo         = "<<< Sun VirtualBox Disk Image >>>\n";
 PUBLIC PSTR pszVdiInfoAlt      = "<<< Sun xVM VirtualBox Disk Image >>>\n";
 PUBLIC PSTR pszVdiInfoInno     = "<<< innotek VirtualBox Disk Image >>>\n";
-PUBLIC PSTR pszVdiInfoCloneVDI = "<<< CloneVDI VirtualBox Disk Image >>>\n";
+PUBLIC PSTR pszVdiInfoSlimVDI = "<<< SlimVDI VirtualBox Disk Image >>>\n";
 PUBLIC PSTR pszQemuVdiInfo     = "<<< QEMU VM Virtual Disk Image >>>\n";
 PUBLIC PSTR pszVdiInfoOracle   = "<<< Oracle VM VirtualBox Disk Image >>>\n";
 
@@ -189,7 +189,7 @@ static BOOL
 PreHeaderOK(VDI_PREHEADER *vph)
 {
    if ((String_Compare(vph->szFileInfo,pszVdiInfo)==0 || String_Compare(vph->szFileInfo,pszVdiInfoAlt)==0 ||
-        String_Compare(vph->szFileInfo,pszVdiInfoInno)==0 || String_Compare(vph->szFileInfo,pszVdiInfoCloneVDI)==0 ||
+        String_Compare(vph->szFileInfo,pszVdiInfoInno)==0 || String_Compare(vph->szFileInfo,pszVdiInfoSlimVDI)==0 ||
         String_Compare(vph->szFileInfo,pszQemuVdiInfo)==0 || String_Compare(vph->szFileInfo,pszVdiInfoOracle)==0 ) &&
        vph->u32Signature==VDI_SIGNATURE && (vph->u32Version==VDI_VERSION_1_0 || vph->u32Version==VDI_VERSION_1_1)) return TRUE;
    VDDR_LastError = VDIR_ERR_NOTVDI;

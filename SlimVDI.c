@@ -31,7 +31,7 @@
 #include "ids.h"
 
 // fixed strings, these don't get localized
-static PSTR szINIFileName = "CloneVDI.ini"; // must not be longer than 31 chars.
+static PSTR szINIFileName = "SlimVDI.ini"; // must not be longer than 31 chars.
 static PSTR szSrcFileName = "SrcFile";
 static PSTR szDstFileName = "DstFile";
 static PSTR szLanguage    = "Language";
@@ -44,7 +44,7 @@ static PSTR pszUNKNOWNFS     /* = "Unknown(%02lx)" */ ;
 static PSTR pszPLSSELSRC     /* = "Please select a source virtual disk" */ ;
 static PSTR pszNOSRC         /* = "Cannot proceed - the source file does not exist!" */ ;
 static PSTR pszERRAPPWND     /* = "Could not create app window (error x%x)" */ ;
-static PSTR pszDLG_CLONEVDI  /* = "DLG_CLONEVDI" */ ;
+static PSTR pszDLG_SLIMVDI  /* = "DLG_SLIMVDI" */ ;
 
 /*
 // these declarations moved to parms.h
@@ -450,7 +450,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int nCmdSh
 
       HexView_RegisterClass(hInstance);
 
-      hWnd = CreateDialogParam (hInstApp, RSTR(DLG_CLONEVDI), NULL, DialogProc, 0);
+      hWnd = CreateDialogParam (hInstApp, RSTR(DLG_SLIMVDI), NULL, DialogProc, 0);
 
       if (!hWnd) {
          char buf[256];
@@ -485,6 +485,6 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int nCmdSh
 
 /*.......................................................................*/
 
-/* end of clonevdi.c */
+/* end of slimvdi.c */
 
 

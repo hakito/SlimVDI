@@ -28,7 +28,7 @@ LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
 }
 
 
-DLG_CLONEVDI_DE DIALOG 171, 140, 365, 232
+DLG_SLIMVDI_DE DIALOG 171, 140, 365, 232
 STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Virtual HD Clone and Optimize v%lu.%02lX"
 FONT 8, "MS Sans Serif"
@@ -370,7 +370,7 @@ LANGUAGE LANG_GERMAN,SUBLANG_GERMAN
    IDS_NOYES,           "NJ"
    
    /* dialog resource names, should match dialog templates defined above */
-   IDS_DLG_CLONEVDI,          "DLG_CLONEVDI_DE"
+   IDS_DLG_SLIMVDI,          "DLG_SLIMVDI_DE"
    IDS_DLG_ALT_PROGRESS,      "DLG_ALT_PROGRESS_DE"
    IDS_DLG_PARTINFO,          "DLG_PARTINFO_DE"
    IDS_DLG_VDI_HDR_INFO,      "DLG_VDI_HDR_INFO_DE"
@@ -380,7 +380,7 @@ LANGUAGE LANG_GERMAN,SUBLANG_GERMAN
    IDS_DLG_WRITE_SECTORS,     "DLG_WRITE_SECTORS_DE"
    IDS_DLG_ALT_SECTOR_VIEWER, "DLG_ALT_SECTOR_VIEWER_DE"
 
-   /* CloneVDI.c */
+   /* SlimVDI.c */
    IDS_SELECT_SOURCE,   "Quelldatei auswaehlen..."
    IDS_SRCFILEFILTER,   "virtuelle Laufwerksdateien\000*.vdi;*.vhd;*.vmdk;*.raw;*.img;*.hdd\000\000"
    IDS_SELECT_DEST,     "Zieldateinamen auswaehlen..."
@@ -406,7 +406,7 @@ LANGUAGE LANG_GERMAN,SUBLANG_GERMAN
    IDS_ERRRENAME,       "Konnte die alte VDI nicht umbenennen - eine Sicherungsdatei mit dem vorgesehenen Namen existiert bereits! Darum behaelt der Klon seinen temporaeren Dateinamen von '%s'"
 
    /* cmdline.c */
-   IDS_USAGE00,         "\015\012Verwendung: CloneVDI <Quelldateiname> {Optionen}\015\012"
+   IDS_USAGE00,         "\015\012Verwendung: SlimVDI <Quelldateiname> {Optionen}\015\012"
    IDS_USAGE01,         "\015\012"
    IDS_USAGE02,         "Option-Name         Wirkung\015\012"
    IDS_USAGE03,         "-----------         ------\015\012"
@@ -426,7 +426,7 @@ LANGUAGE LANG_GERMAN,SUBLANG_GERMAN
    IDS_USAGE17,         "\015\012"
    IDS_USAGE18,         "Optionen koennen gruppiert werden, z.B. -kce oder --keepuuid+enlarge. Options-\015\012"
    IDS_USAGE19,         "parameter sollten in der gleichen Reihenfolge wie die Gruppe angegeben werden.\015\012"
-   IDS_BANNER0,         "\015\012CloneVDI %lu.%02lx\015\012"
+   IDS_BANNER0,         "\015\012SlimVDI %lu.%02lx\015\012"
    IDS_BANNER1,         "Copyright (C) %lu, Don Milne\015\012"
    IDS_BANNER2,         "Rueckmeldungen an: mpack auf forums.virtualbox.org\015\012"
    IDS_ARGERR,          "Fehler im Argument %lu: %s.\015\012"

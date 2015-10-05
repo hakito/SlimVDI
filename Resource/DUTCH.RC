@@ -25,7 +25,7 @@ LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
  PUSHBUTTON "Annuleren", 2, 4, 105, 50, 14
 }
 
-DLG_CLONEVDI_DUTCH DIALOG 171, 140, 365, 232
+DLG_SLIMVDI_DUTCH DIALOG 171, 140, 365, 232
 STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Virtuele HD Kloon en Optimalisatie v%lu.%02lX"
 FONT 8, "MS Sans Serif"
@@ -369,7 +369,7 @@ LANGUAGE LANG_DUTCH, SUBLANG_DUTCH
    IDS_NOYES,           "NJ"
    
    /* dialog resource names, should match dialog templates defined above */
-   IDS_DLG_CLONEVDI,          "DLG_CLONEVDI_DUTCH"
+   IDS_DLG_SLIMVDI,          "DLG_SLIMVDI_DUTCH"
    IDS_DLG_ALT_PROGRESS,      "DLG_ALT_PROGRESS_DUTCH"
    IDS_DLG_PARTINFO,          "DLG_PARTINFO_DUTCH"
    IDS_DLG_VDI_HDR_INFO,      "DLG_VDI_HDR_INFO_DUTCH"
@@ -379,7 +379,7 @@ LANGUAGE LANG_DUTCH, SUBLANG_DUTCH
    IDS_DLG_WRITE_SECTORS,     "DLG_WRITE_SECTORS_DUTCH"
    IDS_DLG_ALT_SECTOR_VIEWER, "DLG_ALT_SECTOR_VIEWER_DUTCH"
 
-   /* CloneVDI.c */
+   /* SlimVDI.c */
    IDS_SELECT_SOURCE,   "Kies bron bestand..."
    IDS_SRCFILEFILTER,   "Virtuele harde schijf bestanden\000*.vdi;*.vhd;*.vmdk;*.raw;*.img;*.hdd\000\000"
    IDS_SELECT_DEST,     "Kies een bestemmingsnaam..."
@@ -405,7 +405,7 @@ LANGUAGE LANG_DUTCH, SUBLANG_DUTCH
    IDS_ERRRENAME,       "Kan de oude VDI niet hernoemen - een backup van de doelnaam bestaat al! Om deze reden zal de kloon de tijdelijke naam houden van '%s'"
 
    /* cmdline.c */
-   IDS_USAGE00,         "\015\012Gebruik: CloneVDI <bron bestandsnaam> {opties}\015\012"
+   IDS_USAGE00,         "\015\012Gebruik: SlimVDI <bron bestandsnaam> {opties}\015\012"
    IDS_USAGE01,         "\015\012"
    IDS_USAGE02,         "Optie Naam       Resultaat\015\012"
    IDS_USAGE03,         "-----------       ------\015\012"
@@ -425,7 +425,7 @@ LANGUAGE LANG_DUTCH, SUBLANG_DUTCH
    IDS_USAGE17,         "\015\012"
    IDS_USAGE18,         "Opties kunnen worden samengevoegd, bijv. -kce of --keepuuid+enlarge. Optie\015\012"
    IDS_USAGE19,         "parameters moeten dezelfde volgorde krijgen als de groep.\015\012"
-   IDS_BANNER0,         "\015\012CloneVDI %lu.%02lx\015\012"
+   IDS_BANNER0,         "\015\012SlimVDI %lu.%02lx\015\012"
    IDS_BANNER1,         "Copyright (C) %lu, Don Milne\015\012"
    IDS_BANNER2,         "Commentaar (in Engels) naar: mpack op forums.virtualbox.org\015\012"
    IDS_ARGERR,          "Fout in argument %lu: %s.\015\012"

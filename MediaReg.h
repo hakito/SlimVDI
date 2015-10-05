@@ -11,7 +11,7 @@
 /* VirtualBox v4 introduced a new folder arrangement and a distributed media      */
 /* registry, i.e. parts of the media registry are stored in each VM settings xml  */
 /* and also (for legacy reasons) still in VirtualBox.xml.  I dislike the idea of  */
-/* trying to access this complexity from CloneVDI, so I've tried to come up with  */
+/* trying to access this complexity from SlimVDI, so I've tried to come up with  */
 /* something much simpler and more robust: I'll simply build an implied media     */
 /* registry by scanning all the virtual disk files in a folder. I'll use various  */
 /* tricks and logic to guess which folders to look in.                            */

@@ -15,7 +15,7 @@
 
 #define VDI_SIGNATURE   (0xBEDA107F)
 
-extern PSTR pszVdiInfoCloneVDI /* = "<<< CloneVDI VirtualBox Disk Image >>>\n" */ ;
+extern PSTR pszVdiInfoSlimVDI /* = "<<< SlimVDI VirtualBox Disk Image >>>\n" */ ;
 extern PSTR pszVdiInfo         /* = "<<< Sun VirtualBox Disk Image >>>\n" */ ;
 extern PSTR pszVdiInfoAlt      /* = "<<< Sun xVM VirtualBox Disk Image >>>\n" */ ;
 extern PSTR pszVdiInfoInno     /* = "<<< innotek VirtualBox Disk Image >>>\n" */ ;

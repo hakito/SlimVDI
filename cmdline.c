@@ -21,7 +21,7 @@ static FNCHAR tmpfn[1024];
 
 // localized strings
 static PSTR pszERROR          /* = "Error" */ ;
-static PSTR pszBANNER0        /* = "\015\012CloneVDI %lu.%02lx\015\012" */ ;
+static PSTR pszBANNER0        /* = "\015\012SlimVDI %lu.%02lx\015\012" */ ;
 static PSTR pszBANNER1        /* = "Copyright (C) %lu, Don Milne\015\012" */ ;
 static PSTR pszBANNER2        /* = "Feedback to: mpack on forums.virtualbox.org\r\n" */ ;
 static PSTR pszARGERR         /* = "Error in argument %lu: %s.\015\012" */ ;

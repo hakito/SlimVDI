@@ -55,8 +55,8 @@ PSTR VDDR_GetErrorString(UINT nErr);
 
 BOOL VDDR_OpenMediaRegistry(CPFN fn);
 /* fn is the absolute path to a hard disk image file. This function looks for a
- * file called "CloneVDI_Media.xml" in the same folder, and loads it into memory
- * if it exists (returning TRUE). This optional file allows CloneVDI to resolve
+ * file called "SlimVDI_Media.xml" in the same folder, and loads it into memory
+ * if it exists (returning TRUE). This optional file allows SlimVDI to resolve
  * snapshot links even if the VirtualBox media registry is broken.
  */
 
@@ -66,7 +66,7 @@ HVDDR VDDR_Open(CPFN fn, UINT iChain);
  * objects always request FILE_SHARE_READ access (not allowing FILE_SHARE_WRITE),
  * since we can't have VBox modifying the file while we are using it. The only
  * exception is when the VMDK object opens a physical disk or partition, in
- * which case the sharing mode allows both read and write, otherwise CloneVDI
+ * which case the sharing mode allows both read and write, otherwise SlimVDI
  * couldn't clone a running OS drive.
  *
  * Returns an object instance pointer if successful. Success indicates
@@ -135,7 +135,7 @@ BOOL PUBLIC_METHOD(GetDriveUUID)(HVDDR pThis, S_UUID *drvuuid);
 
 BOOL PUBLIC_METHOD(IsSnapshot)(HVDDR pThis);
 // Returns TRUE if the virtual drive is a differencing type image dependant on some parent file.
-// Implementation note: CloneVDI will reject the source disk if this function returns TRUE, so if the
+// Implementation note: SlimVDI will reject the source disk if this function returns TRUE, so if the
 // underlying VDDR object actually supports snapshots then this function should always return FALSE.
 
 int PUBLIC_METHOD(ReadPage)(HVDDR pThis, void *buffer, UINT iPage, UINT SPBshift);

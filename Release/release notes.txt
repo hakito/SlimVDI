@@ -4,7 +4,7 @@
 /* See LICENSE.TXT for conditions on copying, distribution, modification and use. */
 /*================================================================================*/
 
-CloneVDI v2.10 Release Notes
+SlimVDI v2.10 Release Notes
 Don Milne (aka user mpack on forums.virtualbox.org)
 9th September, 2012
 
@@ -13,13 +13,13 @@ But, if you can think of anything else that should go in here then do let me kno
 
 Intended audience: users of Oracle's "VirtualBox", a Virtual Machine application.
 
-Addendum: CloneVDI v1.20 added VHD read support, v1.30 added VMDK read support, later
+Addendum: SlimVDI v1.20 added VHD read support, v1.30 added VMDK read support, later
 versions added other formats.  However I do not intend to go through this document replacing
 every occurrence of "VDI" with "VDI or VHD or {etc}". You may assume that, unless I specifically
 say otherwise, then anything you can do with a VDI as input, you can also do with the other
 formats as input. That specifically includes keeping the old or generating a new UUID, compacting
 while copying, and enlarging the drive. The only thing to remember is that the output from
-CloneVDI is always a dynamically expanding VDI, the other formats are supported for reading
+SlimVDI is always a dynamically expanding VDI, the other formats are supported for reading
 only.
 
 USAGE INSTRUCTIONS FOLLOW THE FAQ SECTION.
@@ -37,17 +37,17 @@ FAQ
 Q. What does it do?
 A. It makes copies of (i.e. clones) Oracle VirtualBox Virtual Disk Image (VDI) files. It can also
    convert Microsoft VHD, VMWare VMDK, Parallels HDD (v2), raw disk or partition image files,
-   and even physical Windows drives - into a VDI file. Note that CloneVDI is not a GUI for VBoxManage,
+   and even physical Windows drives - into a VDI file. Note that SlimVDI is not a GUI for VBoxManage,
    it is entirely stand-alone, using my own code for reading and writing VDI, and for reading the
    other supported formats.
 
 Q. How do I install it?
 A. It came as a .zip, just create a folder and unzip the contents into it. After that you can
-   optionally create a shortcut to link your desktop to the CloneVDI.exe file inside the target
+   optionally create a shortcut to link your desktop to the SlimVDI.exe file inside the target
    folder.
 
 Q. What's the point? - VirtualBox has cloning built in as standard!
-A. When CloneVDI was first created in 2009, VirtualBox only supported cloning from the command
+A. When SlimVDI was first created in 2009, VirtualBox only supported cloning from the command
    line, which many users disliked. I also wanted to add a number of features that VirtualBox
    did not provide. And, I wanted the flexibility to add more features in the future, independant
    of what the VBox developers choose to do.
@@ -58,7 +58,7 @@ A. When CloneVDI was first created in 2009, VirtualBox only supported cloning fr
      "so how long is this going to take?".
    o Speed. I wanted to see if cloning could be any faster, though I have not really made a
      serious effort in that direction yet. However, in a test I performed, the "VBoxManage
-     clonehd" command took 101s to clone a 1.6GB VDI. My CloneVDI tool did the same in 68
+     clonehd" command took 101s to clone a 1.6GB VDI. My SlimVDI tool did the same in 68
      seconds. But, I find that Windows disk I/O speeds are highly variable, so that could have
      been dumb luck.
    o I wanted more flexibility regarding the UUID (a signature embedded in VDI and most other
@@ -66,19 +66,19 @@ A. When CloneVDI was first created in 2009, VirtualBox only supported cloning fr
      the clone (as "VBoxManage clonehd" always does), but I also have an option to keep the old
      UUID. USE THIS FEATURE WITH CARE - ALWAYS GENERATE A NEW UUID UNLESS YOU KNOW WHEN/WHY THE
      OLD UUID CAN/SHOULD BE RETAINED.
-   o I wanted more flexibility regarding the drive size. CloneVDI has an option to increase
+   o I wanted more flexibility regarding the drive size. SlimVDI has an option to increase
      the virtual drive size of the clone, without disturbing the existing partitions. There is
      a separate option to expand the main partition too (for certain filesystems only) to occupy
      the increased space on the drive.
      ==> VirtualBox added a limited disk "resize" feature to VBoxManage v4.0.0, however I feel
-     that CloneVDI's version is still preferable for many reasons: the short form of which is
-     that CloneVDI is more capable and yet easier to use.
+     that SlimVDI's version is still preferable for many reasons: the short form of which is
+     that SlimVDI is more capable and yet easier to use.
    o I wanted to try optimization of the clone on the fly, i.e. detect blocks which are no
      longer used by the guest filesystem, and discard those from the clone. This feature requires
      me to interpret the contents of the drive, which entails more risk of an error and is therefore
      optional (see the "Compact while copying" checkbox). The easier and entirely safe optimizations
      already performed by "VBoxManage clonehd", such as defragmenting the block order and skipping
-	 zero blocks is of course also done by CloneVDI, regardless of the setting of the compact option.
+	 zero blocks is of course also done by SlimVDI, regardless of the setting of the compact option.
    o I wanted to try other optimizations, such as adjusting the target VDI header size to ensure that
      guest filesystem clusters are aligned on host cluster boundaries, for faster disk I/O.
    o People sometimes have problems getting VBoxManage to perform a particular cloning operation.
@@ -86,7 +86,7 @@ A. When CloneVDI was first created in 2009, VirtualBox only supported cloning fr
      
    VirtualBox finally added GUI support for cloning (both VMs and bare disks) in v4.1.0.  This
    represented a brilliant step forward, and for most everyday uses the integrated VirtualBox feature
-   will be now much more convenient to use than the CloneVDI original. However, CloneVDI continues to
+   will be now much more convenient to use than the SlimVDI original. However, SlimVDI continues to
    be a useful tool for cloning disks in unusual circumstances, e.g. when the VBox media registry 
    refuses to accept a disk, or it has a broken snapshot chain, or when the user wants to preserve
    the UUID, or when the user wants to perform some other operation at the same time, such as compaction
@@ -102,22 +102,22 @@ A. By all means use snapshots if you like them. But, snapshots worry me. I worry
    if they are done as clones.
 
 Q. Will it corrupt my virtual disks?
-A. I don't see how. CloneVDI does not modify the original file (it always makes a copy, then
+A. I don't see how. SlimVDI does not modify the original file (it always makes a copy, then
    modifies the copy), so you can always revert back to the original provided you haven't deleted
    it. If you do intend to delete the original then I suggest that you use the clone for a while
    first, to make sure that everything is stable.
    
    As far as I know, I don't corrupt the clone either. However nobody is immune to bugs, and it's
    quite possible that if you try something unusual then you'll hit a problem. If you find a
-   repeatable bug then do please let me know via the "CloneVDI tool - Discussion & Support" topic
+   repeatable bug then do please let me know via the "SlimVDI tool - Discussion & Support" topic
    on forums.virtualbox.org.
 
 Q. Can it clone VDIs with snapshots?
-A. Yes, CloneVDI v2.00 now has the ability to clone a snapshot VDI (the .VDI files with the strange
+A. Yes, SlimVDI v2.00 now has the ability to clone a snapshot VDI (the .VDI files with the strange
    names that live in your \<VM>\Snapshots folder). It will follow the chain of dependencies back
    to the base VDI and then create a clone which includes all the data from the point in time
    represented by the snapshot.  However this feature only works with VirtualBox native (VDI)
-   snapshots. Support for cloning VMDK and VHD snapshot chains was added in CloneVDI v2.10.
+   snapshots. Support for cloning VMDK and VHD snapshot chains was added in SlimVDI v2.10.
    Snapshots in other formats (such as Parallels .hdd) are still not supported.
 
 Q. Does it include any spyware, adware, trojans - or anything of that ilk?
@@ -131,18 +131,18 @@ Q. Do you have a version that runs on Linux?
 A. I know very little about software development or distribution on a Linux platform. However
    as of v1.42 the source code has been released under a permissive freeBSD-like license, so
    perhaps someone else will do a port. In the meantime I know that the tool works well under
-   Wine on the popular Linux distros [*]. This makes sense, as CloneVDI is very much a "vanilla"
-   Win32 application. It may also be possible to run CloneVDI inside a Windows VM, accessing
+   Wine on the popular Linux distros [*]. This makes sense, as SlimVDI is very much a "vanilla"
+   Win32 application. It may also be possible to run SlimVDI inside a Windows VM, accessing
    VDIs via shared folders, although I've heard reports that this does not always work -
-   CloneVDI doesn't care what folder a file is in, so there may be something about the
+   SlimVDI doesn't care what folder a file is in, so there may be something about the
    VM shared folder interface that doesn't like very large files.
-   [*] ==> I have since been able to confirm that CloneVDI works well under Wine on Mac OS X
+   [*] ==> I have since been able to confirm that SlimVDI works well under Wine on Mac OS X
    hosts as well.
 
 Q. What about non-English language versions?
 A. Version 1.42 added localization support, with initial support for English, Dutch and
    German. V2.01 added a French translation. If you would like to contribute a translation
-   then please see the file "CloneVDI.rc" in the source code, as well as the files
+   then please see the file "SlimVDI.rc" in the source code, as well as the files
    "resource\dutch.rc" and "resource\german.rc" to see how others have done it. If you
    do a translation then please let us know in the discussion topic at forums.virtualbox.org.
    For now I'm happy to do the work of integrating these translations with the other code.
@@ -163,10 +163,10 @@ A. Simply put, the header of every VDI file includes an identifying number, call
    simply use the host operating system file copy function to copy a VDI then VirtualBox refuses
    to let you register the copy, because of conflicting UUID signatures. VHD files also have UUIDs,
    VMDK files usually (but not always) have them too. RAW files obviously don't have UUIDs, nor do
-   Parallels .HDD images. If the input format doesn't have a UUID then CloneVDI has no alternative
+   Parallels .HDD images. If the input format doesn't have a UUID then SlimVDI has no alternative
    but to generate one, and the "keep UUID" option would be ignored.
 
-Q. I've used CloneVDI to clone my source disk.  How do I run the cloned VM under VirtualBox?
+Q. I've used SlimVDI to clone my source disk.  How do I run the cloned VM under VirtualBox?
 A. In fact you don't have a cloned VM, all you have is a cloned hard disk which you are now free
    to either mount in an existing VM, or create a new VM around. A more precise answer to this
    question depends on how and why you made the clone.
@@ -208,7 +208,7 @@ A. I don't believe that the fixed format is necessary or useful, and I don't wan
    free to continue using the VBoxManage tool or perhaps write your own tool.
 
 
-Using CloneVDI
+Using SlimVDI
 --------------
 Just run the executable and a simple dialog box is displayed. The fields on this dialog
 box are discussed below.
@@ -220,7 +220,7 @@ have selected an existing file then several other fields on the dialog will be e
 
 Dest filename: the full path and filename you would like for the clone. Once you select
 a source file <filename> then this field defaults to "Clone of <filename>". The extension
-is forced to "VDI", since CloneVDI currently cannot write other formats.
+is forced to "VDI", since SlimVDI currently cannot write other formats.
 
 NOTE: it is perfectly ok for the source and destination path\filenames to be the same. In
 that case the tool will first write the clone to a temporary file. Then, if all goes well it will
@@ -230,7 +230,7 @@ that way VirtualBox Media Manager should not notice the change. [ Obviously this
 when converting VHD,VMDK or RAW, since the output filename will always have a VDI extension,
 hence the filenames can never match ].
 
-CloneVDI remembers the contents of the source and dest fields between sessions.
+SlimVDI remembers the contents of the source and dest fields between sessions.
 
 2. Options
 Select "Generate new UUID" if you intend to use both original and clone on the same host PC.
@@ -248,13 +248,13 @@ maximum size. If this option is selected then you can enter a new drive size in 
 it. The new size must be at least as large as the old size.
 
 The "Increase partition size" option is only available when the "Increase virtual drive size" option
-is selected. If the "Increase partition size" option is selected then CloneVDI will automatically
+is selected. If the "Increase partition size" option is selected then SlimVDI will automatically
 increase the size of the main partition to fill the new drive size. This feature only works at
 present on FAT16, FAT32 and NTFS partitions, however it has side effects which may be useful to
 you even with other guest filesystems (see the notes on increasing partition size later on).
 
 The "Increase partition size" feature works in a simplistic way, and doesn't work at all for some
-filesystems. An alternative is to let CloneVDI enlarge the drive, then run a third party tool inside
+filesystems. An alternative is to let SlimVDI enlarge the drive, then run a third party tool inside
 the VM to adjust the partition size as required. I know that the free "gparted live CD" works
 well for this: see "http://sourceforge.net/projects/gparted/files/gparted-live-stable/" - download
 the latest ISO and mount it in your guest as a virtual CD, then boot up the VM, after ensuring that
@@ -264,7 +264,7 @@ The "Compact drive while copying" checkbox enables a feature whereby the tool id
 blocks(*) in the guest filesystem, and omits those from the clone. This would be most useful if a
 large amount of file data has been deleted inside the guest. This saves you from having to run SDelete
 or its Linux equivalent before making the clone, to get the same result. This feature only does
-something if CloneVDI recognizes the guest filesystem, and at present the only supported filesystems
+something if SlimVDI recognizes the guest filesystem, and at present the only supported filesystems
 are NTFS (tested with NT4 and later), EXT2/3/4, FAT16 and FAT32. Also, I can only recognize the
 filesystem inside a partition if the disk uses a traditional MBR partition map. I also have experimental
 (not heavily tested) support for Windows Dynamic Disk. I don't yet support Linux LVM or GPT partitioning
@@ -276,7 +276,7 @@ might get better results by defragmenting inside your guest VM first.
 3. Buttons
 "Partition Info" shows the partition map from the MBR of the source VDI.
 "Header Info" shows information taken from the VDI, VHD or VMDK header. RAW files obviously have no
-header to show, but CloneVDI internally treats a RAW disk image as a VMDK with a single flat extent,
+header to show, but SlimVDI internally treats a RAW disk image as a VMDK with a single flat extent,
 so what you will see is the synthesized VMDK header.
 "Sector viewer" lets you view source disk sectors in hex format, and/or dump sectors to a file.
 "Proceed" tells the tool to begin the cloning operation.
@@ -300,7 +300,7 @@ reliable indicator that this is the main partition. Hence, what I do instead is 
 largest partition on a drive is the main partition, and that is the partition I enlarge. Although
 I expect this assumption to be true in most cases there will of course be times when it is not,
 in which case you will need to use a third party partition manager, as in previous versions of
-CloneVDI. I could have added dialogs to prompt the user for this information, but I didn't
+SlimVDI. I could have added dialogs to prompt the user for this information, but I didn't
 want to complicate the user interface.
 
 Although complete functionality (including step 4) is only available for FAT and NTFS
@@ -317,7 +317,7 @@ possible that I simply don't "get" ExtX well enough to see how it could be done 
 
 Cloning Snapshots
 -----------------
-(NOTE THAT THIS SECTION CHANGED SIGNIFICANTLY FOR CLONEVDI VERSION 2.04)
+(NOTE THAT THIS SECTION CHANGED SIGNIFICANTLY FOR SLIMVDI VERSION 2.04)
 
 In this section I will use the term "snapshot" somewhat loosely (and inaccurately) to refer to
 any differencing VDI file, i.e. an incomplete VDI file which requires the presence of at least
@@ -329,28 +329,28 @@ chain, and is needed to complete the virtual disk image. In VirtualBox v4 the ba
 stored by default in the parent folder of the Snapshots folder. In previous VirtualBox versions
 the base VDI was stored in your "<userdoc>\.VirtualBox\HardDisks" folder.
  
-If you select a snapshot (child) VDI file as the source then CloneVDI will scan the remaining VDI
+If you select a snapshot (child) VDI file as the source then SlimVDI will scan the remaining VDI
 files in the same folder to see where they fit in the snapshot chain. Also, if the folder
 happens to be called "Snapshots" then the parent folder will also be scanned, and any VDI files
 found there will receive similar treatment.
 
 Note that no xml media registry need exist. VirtualBox.xml is not checked, nor is the VM.xml
-or VM.vbox file. The "CloneVDI_Media.xml" feature (supported by previous CloneVDI versions) has
+or VM.vbox file. The "SlimVDI_Media.xml" feature (supported by previous SlimVDI versions) has
 been discarded.
 
 This new snapshot chain reconstruction method works well with the new VirtualBox v4 folder
 structure, and it also provides the simplest possible method of creating a flat VDI file from a
 collection of snapshot files: just make sure to put them all in one folder, including the base
-VDI, and CloneVDI should have no problem creating a clone of any one of them.
+VDI, and SlimVDI should have no problem creating a clone of any one of them.
 
 If you still receive an error message that "differencing images are not supported", then it
 means that a valid VDI snapshot chain couldn't be created from the files you provided. Bear in
 mind also that only VDI snapshots are supported.
 
 
-Using CloneVDI to do a P2V ("Physical To Virtual" Disk Conversion)
+Using SlimVDI to do a P2V ("Physical To Virtual" Disk Conversion)
 ------------------------------------------------------------------
-CloneVDI now recognizes when you have used a Windows disk device name as the source filename
+SlimVDI now recognizes when you have used a Windows disk device name as the source filename
 (for example, "\\.\PhysicalDrive0" identifies the boot drive on most Windows hosts), and
 slightly modifies its behaviour in that case to make it possible to clone the physical host
 hard disk to a VDI file. Basically, all it does is use a different method to get the "source
@@ -358,15 +358,15 @@ file size", otherwise everything works as before. Be warned that this feature is
 rudimentary, so it is up to you to use it sensibly. In particular you should have no other
 applications running (certainly nothing that creates and/or writes to files), and the clone
 should be written to a different drive.  On some Windows hosts you may also need to run
-CloneVDI with elevated privileges ("Run as administrator") since this feature requires
-CloneVDI to have sector level (read only) access to the source drive.
+SlimVDI with elevated privileges ("Run as administrator") since this feature requires
+SlimVDI to have sector level (read only) access to the source drive.
 
 
 Notes on VDI Support
 --------------------
 As far as I know, I support all variants of the basic VDI file format, from the oldest Innotek
 format to the latest Oracle format. When writing I write the latest VDI format, which most recent
-VirtualBox versions should support. CloneVDI always writes a dynamic VDI.
+VirtualBox versions should support. SlimVDI always writes a dynamic VDI.
 
 
 Notes on VHD Support
@@ -374,7 +374,7 @@ Notes on VHD Support
 VHD is supported for input only. I support fixed and dynamic VHDs using any block size. Differencing
 VHDs are not supported. Split VHD files are not supported: if you have a split VHD then you should
 download one of the many available free file split/join tools and join the segments into one file
-before processing it with CloneVDI. If you are comfortable with the Windows command prompt then the
+before processing it with SlimVDI. If you are comfortable with the Windows command prompt then the
 "copy" command can also be used to join files (do some web research first, you need to get this VERY
 right!).
 
@@ -397,11 +397,11 @@ I've found online do seem to use the V2 format.
 Notes on RAW Support
 --------------------
 A RAW file is a simple uncompressed image of a disk or partition, the file must have a .raw or .img
-extension, otherwise (since it has no header) CloneVDI has no other way to reliably identify the file
-as a raw image.  A whole disk image is best, but if you give CloneVDI a partition image then it will
+extension, otherwise (since it has no header) SlimVDI has no other way to reliably identify the file
+as a raw image.  A whole disk image is best, but if you give SlimVDI a partition image then it will
 try to identify the partition contents and then reconstruct a full disk image around it (adding a new
 MBR and track0 at the front, and adding padding at the back to create a rounded drive size). One must
-bear in mind however that CloneVDI is trying to reconstruct important missing information and there
+bear in mind however that SlimVDI is trying to reconstruct important missing information and there
 is NO guarantee that the result will work. Also I must apologise to Linux fans, since this ability to
 convert a partition image will not work at all with a Linux partition image, because every working
 Linux disk I've seen has multiple partitions and puts a lot of extra data in track0 (grub boot stuff) -
@@ -412,7 +412,7 @@ it yet.
 
 Additional notes about Converting VHD/VMDK/HDD/RAW to VDI
 ---------------------------------------------------------
-Be warned: all that CloneVDI does when you give it a VHD/VMDK/HDD/RAW file is convert one media type to
+Be warned: all that SlimVDI does when you give it a VHD/VMDK/HDD/RAW file is convert one media type to
 another media type. There is no guarantee that you'll be able to use the media /content/ without
 problems inside VirtualBox. For example, let's say you convert an XP.VHD that previously ran under
 Virtual PC: the same install of XP may not run under VirtualBox right away, due to the different hardware
@@ -424,7 +424,7 @@ under VirtualBox without converting.
 
 Additional notes on the "Sector Viewer" feature
 -----------------------------------------------
-When developing CloneVDI I found myself often wanting a convenient way to view guest disk sectors,
+When developing SlimVDI I found myself often wanting a convenient way to view guest disk sectors,
 and when testing support for RAW files I also found myself in need of a reliable and friendly tool
 for creating raw files by dumping disk sectors from a VDI (usually I needed entire disks or partitions
 dumped to a flat file, and you may (or may not!) be amazed at how unfriendly some of the freely
@@ -438,17 +438,17 @@ example this can be used to export an entire disk or partition to a flat file.
 
 Notes on the Command Line Interface
 -----------------------------------
-Version 1.41 of CloneVDI added support for a command line interface. A total of three run modes are
+Version 1.41 of SlimVDI added support for a command line interface. A total of three run modes are
 therefore supported:
 
-   o Normal GUI mode, which is when CloneVDI is run from the Windows desktop without arguments.
-   o GUI mode with command line, when CloneVDI is run from the Windows desktop with arguments.
-   o CLI mode, which is when CloneVDI is run from a command console with arguments.
+   o Normal GUI mode, which is when SlimVDI is run from the Windows desktop without arguments.
+   o GUI mode with command line, when SlimVDI is run from the Windows desktop with arguments.
+   o CLI mode, which is when SlimVDI is run from a command console with arguments.
    
-For completeness, I should note that if you run CloneVDI from the command console /without/ arguments
+For completeness, I should note that if you run SlimVDI from the command console /without/ arguments
 then it runs in normal GUI mode. The CLI mode usage information is as follows :-
 
-	Usage: CloneVDI <source file name> {options}
+	Usage: SlimVDI <source file name> {options}
 	
 	Option Name       Effect
 	-----------       ------
@@ -473,57 +473,57 @@ then it runs in normal GUI mode. The CLI mode usage information is as follows :-
 	
 Here are some example command lines, which all do the same thing :-
 
-    CloneVDI "My Virtual Disk.vdi" -o "My Clone.vdi" -k -e 64.00GB -c
-    CloneVDI "My Virtual Disk.vdi" -o "My Clone.vdi" -k -e "64.00 GB" -c
-    CloneVDI "My Virtual Disk.vdi" --output "My Clone.vdi" --keeupuuid --enlarge 64.00GB --compact
-    CloneVDI "My Virtual Disk.vdi" -okec "My Clone.vdi" 64.00GB
-    CloneVDI "My Virtual Disk.vdi" --keepuuid+compact+output+enlarge "My Clone.vdi" "64.00 GB"
+    SlimVDI "My Virtual Disk.vdi" -o "My Clone.vdi" -k -e 64.00GB -c
+    SlimVDI "My Virtual Disk.vdi" -o "My Clone.vdi" -k -e "64.00 GB" -c
+    SlimVDI "My Virtual Disk.vdi" --output "My Clone.vdi" --keeupuuid --enlarge 64.00GB --compact
+    SlimVDI "My Virtual Disk.vdi" -okec "My Clone.vdi" 64.00GB
+    SlimVDI "My Virtual Disk.vdi" --keepuuid+compact+output+enlarge "My Clone.vdi" "64.00 GB"
 
 You should bear in mind that the Command Line Interface (CLI) feature is just a different way to
-access the features of CloneVDI, the features themselves still work in the same way. For example,
+access the features of SlimVDI, the features themselves still work in the same way. For example,
 it is legal to make source and destination filenames exactly the same, this would be handled
 exactly as if you had filled the dialog box in the same way, i.e. you will end up with a clone
 with the selected name, and the original file renamed to "Original "+<filename>.
 	
-CloneVDI is an example of a "dual mode" console/GUI application. This presents a small problem when
+SlimVDI is an example of a "dual mode" console/GUI application. This presents a small problem when
 running from the Windows command console: the console expects an application to be /either/ a GUI
 application, or a console application, and not both. A field in the EXE header says which of these
 types a particular application is. In the GUI case the console launches the application as an
 independant process and does not wait for completion. In the CLI case the console does wait for
 completion of the command.
 
-CloneVDI is an application which supports a CLI but is marked as a GUI app, hence the command console
+SlimVDI is an application which supports a CLI but is marked as a GUI app, hence the command console
 will normally launch it as an independant process and not wait for completion. In most cases this is
-no big deal: CloneVDI will do what you asked it to (without a start dialog) and will terminate itself
-when finished. However any text output by CloneVDI will overwrite the next command prompt, which is not
-very elegant (you have to press enter once CloneVDI is done, to make CMD repeat the command prompt).
+no big deal: SlimVDI will do what you asked it to (without a start dialog) and will terminate itself
+when finished. However any text output by SlimVDI will overwrite the next command prompt, which is not
+very elegant (you have to press enter once SlimVDI is done, to make CMD repeat the command prompt).
 
 If you don't like the above behaviour then the Windows command console supports a special run command
 "start /wait <appname>" which forces it to wait until <appname> terminates. So, just prepend the example
-commands given above with "start /wait " and everything should work ok. Alternatively, running CloneVDI
+commands given above with "start /wait " and everything should work ok. Alternatively, running SlimVDI
 inside a batch file also seems to make the system wait for completion (I've provided an example batch
 file - see CloneCLI.bat - which you may want to use). I can't speak for how other scripting languages
 will handle the the situation. I guess you'll let me know.
 
-There is one small quirk that you should probably be aware of, which is that CloneVDI treats the
+There is one small quirk that you should probably be aware of, which is that SlimVDI treats the
 source folder as the target unless told otherwise. For example if you type the command like this:-
 
-    CloneVDI "\Source Folder\Source Name.vdi" --output "Dest Name.vdi"
+    SlimVDI "\Source Folder\Source Name.vdi" --output "Dest Name.vdi"
 	
-Then CloneVDI creates "Dest Name.vdi" in the source folder, /not/ the current folder (if different). To
+Then SlimVDI creates "Dest Name.vdi" in the source folder, /not/ the current folder (if different). To
 change this you need to explicitly give the required target folder in the output filename.
 
-Incidentally, script writers may wish to know that CloneVDI returns an error code of 0 to the shell if
+Incidentally, script writers may wish to know that SlimVDI returns an error code of 0 to the shell if
 all goes well, and a non-zero result code if there was an error. If run from the command console then
 there should also be an error message in the latter case.
 
 
 Notes on Language Support (Localization)
 ----------------------------------------
-After careful thought I decided that CloneVDI would not adjust itself automatically to a locale, since
+After careful thought I decided that SlimVDI would not adjust itself automatically to a locale, since
 I was not convinced that the preferred language need always be the same as the locale. So, if you want
-CloneVDI to use a different language then you need to add a "Language=n" line to the [Options] section
-of the "clonevdi.ini" file (or modify the option if it is already there). 'n' is a number indicating
+SlimVDI to use a different language then you need to add a "Language=n" line to the [Options] section
+of the "slimvdi.ini" file (or modify the option if it is already there). 'n' is a number indicating
 the preferred language. Currently supported numbers are 0=English, 1=Dutch, 2=German, 3=French. English
 is the default if the option is not present or the language number not recognized. Incidentally, there
 is no significance in the numbering, I simply allocate new numbers in the order that translations are
@@ -573,14 +573,14 @@ o Support for Windows Dynamic Disk partitions.
 o Added .ini option to control state of "Compact" option on startup.
 
 Fixes  
-o Actually, this might qualify as a new feature. CloneVDI now identifies data in
+o Actually, this might qualify as a new feature. SlimVDI now identifies data in
   unpartitioned space on the drive as unused. Previously it could only recognize unused
   space inside a partition which used a recognized filesystem. It simply hadn't occurred
   to me that unpartitioned space might contain data that the user now expects to get rid
   of (eg. because the user shrank a partition using gparted).
 o Changed method of calculating time to completion to take the results of
   compaction into account in advance. Obviously this only makes a difference if the
-  compact option is selected. This also means that CloneVDI calculates required disk
+  compact option is selected. This also means that SlimVDI calculates required disk
   space more accurately, no longer assuming that the clone will be the same size as
   the original.
 o Fixed a poor design feature which caused slow performance when converting
@@ -605,15 +605,15 @@ Other Contributers
 ------------------
 My thanks to the following people :-
 
-o Sasquatch @ forums.virtualbox.org for providing the Dutch translation of the CloneVDI resource
+o Sasquatch @ forums.virtualbox.org for providing the Dutch translation of the SlimVDI resource
   file.
 o Erich N. Weitzeil (a.k.a. Etepetete @ forums.virtualbox.org) for the German translation of the
-  CloneVDI resource file.
-o Gregory (a.k.a. Gregoo @ forums.virtualbox.org) for the French translation of the CloneVDI
+  SlimVDI resource file.
+o Gregory (a.k.a. Gregoo @ forums.virtualbox.org) for the French translation of the SlimVDI
   resource file.
 o MarkCranness @ forums.virtualbox.org for contributing a better looking application icon.
 o Makoto Matsumoto and Takuji Nishimura for making available an open source permissive licensed
-  C implementation of their "Mersenne Twister" pseudo-random number generator algorithm. CloneVDI
+  C implementation of their "Mersenne Twister" pseudo-random number generator algorithm. SlimVDI
   itself makes very minor use of this, but I have found the code useful in several applications
   (in fact this is now my standard PRNG module).
 o Chris Waters (a.k.a. cgwaters @ forums.virtualbox.org) for going to a lot of trouble to provide

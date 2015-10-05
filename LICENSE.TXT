@@ -1,7 +1,7 @@
 
 (This is the essentially the "FreeBSD License")
 
-The CloneVDI executable and, with exceptions noted below, all individual CloneVDI source
+The SlimVDI executable and, with exceptions noted below, all individual SlimVDI source
 files are :-
 
 Copyright (C) 2010, Don Milne.

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="CloneVDI"
+	Name="SlimVDI"
 	ProjectGUID="{5F353895-5313-4A1A-BB98-6E7F8452FF78}"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="0"
@@ -349,7 +349,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\clonevdi.rc"
+				RelativePath=".\slimvdi.rc"
 				>
 			</File>
 		</Filter>
@@ -363,15 +363,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CloneVDI.c"
+				RelativePath=".\SlimVDI.c"
 				>
 			</File>
 			<File
-				RelativePath=".\CloneVDI.def"
+				RelativePath=".\SlimVDI.def"
 				>
 			</File>
 			<File
-				RelativePath=".\CloneVDI.manifest"
+				RelativePath=".\SlimVDI.manifest"
 				>
 			</File>
 			<File
@@ -492,7 +492,7 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\VTune\CloneVDI.vpj"
+			RelativePath=".\VTune\SlimVDI.vpj"
 			>
 		</File>
 	</Files>

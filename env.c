@@ -33,7 +33,7 @@ static UI32   argc;
 static PSTR   argv[N_MAX_ARGS];
 static CHAR   argbuff[ARGBUFSIZ];
 static HINSTANCE hInstRes,hInstLang;
-static UINT   CloneVDI_Language_Code;
+static UINT   SlimVDI_Language_Code;
 static LANGID idDefaultLanguage;
 static STRING_CACHE *pStrCache;
 static BOOL   bCOMInitDone;
@@ -236,7 +236,7 @@ Env_SetLanguage(HINSTANCE hInstLangDLL, UINT idLanguage)
       idLanguage = 0;
       idDefaultLanguage = MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_UK);
    }
-   CloneVDI_Language_Code = idLanguage;
+   SlimVDI_Language_Code = idLanguage;
 }
 
 /*.....................................................*/
@@ -244,7 +244,7 @@ Env_SetLanguage(HINSTANCE hInstLangDLL, UINT idLanguage)
 PUBLIC UINT
 Env_GetLanguage(void)
 {
-   return CloneVDI_Language_Code;
+   return SlimVDI_Language_Code;
 }
 
 /*.....................................................*/

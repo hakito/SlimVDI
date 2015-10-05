@@ -316,7 +316,7 @@ WriteHeader(PVDI pVDI)
    // write pre-header first.
    Mem_Zero(&vph,sizeof(vph));
 // String_Copy(vph.szFileInfo,pszVdiInfo,64);
-   String_Copy(vph.szFileInfo,pszVdiInfoCloneVDI,64);
+   String_Copy(vph.szFileInfo,pszVdiInfoSlimVDI,64);
    vph.u32Signature = VDI_SIGNATURE;
    vph.u32Version = VDI_LATEST_VERSION;
    File_WrBin(pVDI->f, &vph, sizeof(vph));

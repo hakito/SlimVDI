@@ -4,7 +4,7 @@
 /* See LICENSE.TXT for conditions on copying, distribution, modification and use. */
 /*================================================================================*/
 
-/* CloneVDI up to and including v1.43 detects unused space only inside a supported
+/* SlimVDI up to and including v1.43 detects unused space only inside a supported
  * filesystem. Hence I have FSYS instances to handle FATx, NTFS and EXTx. I previously
  * overlooked the possibility that unpartitioned regions of the disk may also contain
  * data that which could be discarded (e.g. after a partition has been shrunk or

@@ -5,7 +5,7 @@
 /*================================================================================*/
 
 /****************************************************************************
-clonevdi.rc
+slimvdi.rc
 *****************************************************************************/
 
 #ifndef WS_POPUP
@@ -38,8 +38,8 @@ LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
  PUSHBUTTON "Cancel", 2, 4, 105, 50, 14
 }
 
-/* as used in clonevdi.c */
-DLG_CLONEVDI DIALOG 171, 140, 365, 232
+/* as used in slimvdi.c */
+DLG_SLIMVDI DIALOG 171, 140, 365, 232
 STYLE DS_MODALFRAME | 0x4L | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Virtual HD Clone and Optimize v%lu.%02lX"
 FONT 8, "MS Sans Serif"
@@ -373,7 +373,7 @@ LANGUAGE LANG_NEUTRAL , SUBLANG_NEUTRAL
  LTEXT "Offset:", 101, 138, 3, 65, 8, NOT WS_GROUP
 }
 
-APP_ICON ICON "resource/CloneVDI.ico"
+APP_ICON ICON "resource/SlimVDI.ico"
 MBR_TEMPLATE RCDATA "resource/mbr.bin"
 
 1 VERSIONINFO 
@@ -389,9 +389,9 @@ FILETYPE VFT_APP
    VALUE "Author", "Don Milne (mpack@forums.virtualbox.org)\000\000"
    VALUE "FileDescription", "Virtual Disk Copy and Optimize Tool\000"
    VALUE "FileVersion", SOFTWARE_VERSION_STR
-   VALUE "InternalName", "CloneVDI\000"
+   VALUE "InternalName", "SlimVDI\000"
    VALUE "LegalCopyright", COPYRIGHT_STR
-   VALUE "OriginalFilename", "clonevdi.exe\000"
+   VALUE "OriginalFilename", "slimvdi.exe\000"
   }
 
  }
@@ -417,7 +417,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
    IDS_NOYES,           "NY"
    
    /* dialog resource names, should match dialog templates defined above */
-   IDS_DLG_CLONEVDI,          "DLG_CLONEVDI"
+   IDS_DLG_SLIMVDI,          "DLG_SLIMVDI"
    IDS_DLG_ALT_PROGRESS,      "DLG_ALT_PROGRESS"
    IDS_DLG_PARTINFO,          "DLG_PARTINFO"
    IDS_DLG_VDI_HDR_INFO,      "DLG_VDI_HDR_INFO"
@@ -427,7 +427,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
    IDS_DLG_WRITE_SECTORS,     "DLG_WRITE_SECTORS"
    IDS_DLG_ALT_SECTOR_VIEWER, "DLG_ALT_SECTOR_VIEWER"
 
-   /* CloneVDI.c */
+   /* SlimVDI.c */
    IDS_SELECT_SOURCE,   "Select source file..."
    IDS_SRCFILEFILTER,   "Virtual drive files\000*.vdi;*.vhd;*.vmdk;*.raw;*.img;*.hdd\000\000"
    IDS_SELECT_DEST,     "Select destination filename..."
@@ -453,7 +453,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
    IDS_ERRRENAME,       "Could not rename old VDI - a backup file of the intended name already exists! Therefore the clone will keep its temp filename of '%s'"
 
    /* cmdline.c */
-   IDS_USAGE00,         "\015\012Usage: CloneVDI <source file name> {options}\015\012"
+   IDS_USAGE00,         "\015\012Usage: SlimVDI <source file name> {options}\015\012"
    IDS_USAGE01,         "\015\012"
    IDS_USAGE02,         "Option Name       Effect\015\012"
    IDS_USAGE03,         "-----------       ------\015\012"
@@ -473,7 +473,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
    IDS_USAGE17,         "\015\012"
    IDS_USAGE18,         "Options can be grouped, eg. -kce or --keepuuid+enlarge. Option\015\012"
    IDS_USAGE19,         "parameters should follow, in the same order as the group.\015\012"
-   IDS_BANNER0,         "\015\012CloneVDI %lu.%02lx\015\012"
+   IDS_BANNER0,         "\015\012SlimVDI %lu.%02lx\015\012"
    IDS_BANNER1,         "Copyright (C) %lu, Don Milne\015\012"
    IDS_BANNER2,         "Feedback to: mpack on forums.virtualbox.org\015\012"
    IDS_ARGERR,          "Error in argument %lu: %s.\015\012"

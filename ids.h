@@ -20,29 +20,29 @@
 #define IDS_NOYES                 5   /* = "NY" */
 
 /* dialog box template names */
-#define IDS_DLG_CLONEVDI          20                   /* = "DLG_CLONEVDI" */
-#define IDS_DLG_ALT_PROGRESS      (IDS_DLG_CLONEVDI+1) /* = "DLG_ALT_PROGRESS" */
-#define IDS_DLG_PARTINFO          (IDS_DLG_CLONEVDI+2) /* = "DLG_PARTINFO" */
-#define IDS_DLG_VDI_HDR_INFO      (IDS_DLG_CLONEVDI+3) /* = "DLG_VDI_HDR_INFO" */
-#define IDS_DLG_VHD_HDR_INFO      (IDS_DLG_CLONEVDI+4) /* = "DLG_VHD_HDR_INFO" */
-#define IDS_DLG_HDD_HDR_INFO      (IDS_DLG_CLONEVDI+5) /* = "DLG_HDD_HDR_INFO" */
-#define IDS_DLG_VMDK_HDR_INFO     (IDS_DLG_CLONEVDI+6) /* = "DLG_VMDK_HDR_INFO" */
-#define IDS_DLG_WRITE_SECTORS     (IDS_DLG_CLONEVDI+7) /* = "DLG_WRITE_SECTORS" */
-#define IDS_DLG_ALT_SECTOR_VIEWER (IDS_DLG_CLONEVDI+8) /* = "DLG_ALT_SECTOR_VIEWER" */
+#define IDS_DLG_SLIMVDI          20                   /* = "DLG_SLIMVDI" */
+#define IDS_DLG_ALT_PROGRESS      (IDS_DLG_SLIMVDI+1) /* = "DLG_ALT_PROGRESS" */
+#define IDS_DLG_PARTINFO          (IDS_DLG_SLIMVDI+2) /* = "DLG_PARTINFO" */
+#define IDS_DLG_VDI_HDR_INFO      (IDS_DLG_SLIMVDI+3) /* = "DLG_VDI_HDR_INFO" */
+#define IDS_DLG_VHD_HDR_INFO      (IDS_DLG_SLIMVDI+4) /* = "DLG_VHD_HDR_INFO" */
+#define IDS_DLG_HDD_HDR_INFO      (IDS_DLG_SLIMVDI+5) /* = "DLG_HDD_HDR_INFO" */
+#define IDS_DLG_VMDK_HDR_INFO     (IDS_DLG_SLIMVDI+6) /* = "DLG_VMDK_HDR_INFO" */
+#define IDS_DLG_WRITE_SECTORS     (IDS_DLG_SLIMVDI+7) /* = "DLG_WRITE_SECTORS" */
+#define IDS_DLG_ALT_SECTOR_VIEWER (IDS_DLG_SLIMVDI+8) /* = "DLG_ALT_SECTOR_VIEWER" */
 
-/* strings from CloneVDI.c */
-#define IDS_CLONEVDI 100
-#define IDS_SELECT_SOURCE  (IDS_CLONEVDI+0) /* = "Select source file..." */
-#define IDS_SRCFILEFILTER  (IDS_CLONEVDI+1) /* = "Virtual drive files\0*.vdi;*.vhd;*.vmdk;*.raw;*.img\0\0" */
-#define IDS_SELECT_DEST    (IDS_CLONEVDI+2) /* = "Select destination filename..." */
-#define IDS_DSTFILEFILTER  (IDS_CLONEVDI+3) /* = "Virtual drive files\0*.vdi\0\0" */
-#define IDS_UNKNOWNFS      (IDS_CLONEVDI+4) /* = "Unknown(%02lx)" */
-#define IDS_PLSSELSRC      (IDS_CLONEVDI+5) /* = "Please select a source virtual disk" */
-#define IDS_NOSRC          (IDS_CLONEVDI+6) /* = "Cannot proceed - source file does not exist!" */
-#define IDS_ERRAPPWND      (IDS_CLONEVDI+7) /* = "Could not create app window (error x%x)" */
+/* strings from SlimVDI.c */
+#define IDS_SLIMVDI 100
+#define IDS_SELECT_SOURCE  (IDS_SLIMVDI+0) /* = "Select source file..." */
+#define IDS_SRCFILEFILTER  (IDS_SLIMVDI+1) /* = "Virtual drive files\0*.vdi;*.vhd;*.vmdk;*.raw;*.img\0\0" */
+#define IDS_SELECT_DEST    (IDS_SLIMVDI+2) /* = "Select destination filename..." */
+#define IDS_DSTFILEFILTER  (IDS_SLIMVDI+3) /* = "Virtual drive files\0*.vdi\0\0" */
+#define IDS_UNKNOWNFS      (IDS_SLIMVDI+4) /* = "Unknown(%02lx)" */
+#define IDS_PLSSELSRC      (IDS_SLIMVDI+5) /* = "Please select a source virtual disk" */
+#define IDS_NOSRC          (IDS_SLIMVDI+6) /* = "Cannot proceed - source file does not exist!" */
+#define IDS_ERRAPPWND      (IDS_SLIMVDI+7) /* = "Could not create app window (error x%x)" */
 
 /* strings from Clone.c */
-#define IDS_CLONE (IDS_CLONEVDI+50)
+#define IDS_CLONE (IDS_SLIMVDI+50)
 #define IDS_LOMEM           (IDS_CLONE+0)  /* = "Low memory! Could not allocate copy buffer!" */
 #define IDS_FINDINGUSEDBLKS (IDS_CLONE+1)  /* = "Finding used blocks in partitions - please wait..." */
 #define IDS_CLONINGVHD      (IDS_CLONE+2)  /* = "Cloning Virtual Hard Disk..." */
@@ -80,7 +80,7 @@
 #define IDS_USAGE18         (IDS_CMDLINE+18)
 #define IDS_USAGE19         (IDS_CMDLINE+19)
 #define IDS_USAGE_LAST      IDS_USAGE19
-#define IDS_BANNER0         (IDS_CMDLINE+20)  /* = "\015\012CloneVDI %lu.%02lx\015\012" */
+#define IDS_BANNER0         (IDS_CMDLINE+20)  /* = "\015\012SlimVDI %lu.%02lx\015\012" */
 #define IDS_BANNER1         (IDS_CMDLINE+21)  /* = "Copyright (C) %lu, Don Milne\015\012" */
 #define IDS_BANNER2         (IDS_CMDLINE+22)  /* = "Feedback to: mpack on forums.virtualbox.org\r\n" */
 #define IDS_ARGERR          (IDS_CMDLINE+23)  /* = "Error in argument %lu: %s.\015\012" */
