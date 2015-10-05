@@ -6,7 +6,7 @@ This readme is based on the "release notes.txt" of CloneVDI and has been updated
 ## Main differences to CloneVDI
 
 * Support of removing unused blocks for diff images (without merging with base images)
-* Work with diff images inf command line mode
+* Work with diff images in command line mode
 * Real headless command line mode (without showing a progress dialog)
 
 PLEASE READ THIS DOCUMENT CAREFULLY, IT SHOULD CONTAIN ANSWERS TO MOST QUESTIONS.
