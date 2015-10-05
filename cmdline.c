@@ -40,6 +40,7 @@ static PSTR pszVOPTKEEPUUID   = "keepuuid";
 static PSTR pszVOPTENLARGE    = "enlarge";
 static PSTR pszVOPTCOMPACT    = "compact";
 static PSTR pszVOPTREPART     = "repart";
+static PSTR pszVOPTNOMERGE    = "nomerge";
 static PSTR pszVOPTHELP       = "help";
 static PSTR pszCHAROPT        = "okechr";
 
@@ -196,6 +197,8 @@ CmdLine_Parse(s_CLONEPARMS *parm)
                   if (!GetOption(parm,iArg,PARM_FLAG_KEEPUUID,pszVOPTKEEPUUID)) return FALSE;
                } else if  (String_Compare(szItem,pszVOPTCOMPACT)==0) {
                   if (!GetOption(parm,iArg,PARM_FLAG_COMPACT,pszVOPTCOMPACT)) return FALSE;
+			   } else if (String_Compare(szItem, pszVOPTNOMERGE) == 0) {
+				   if (!GetOption(parm, iArg, PARM_FLAG_NOMERGE, pszVOPTNOMERGE)) return FALSE;
                } else if  (String_Compare(szItem,pszVOPTREPART)==0) {
                   if (!GetOption(parm,iArg,PARM_FLAG_REPART,pszVOPTREPART)) return FALSE;
                } else if  (String_Compare(szItem,pszVOPTENLARGE)==0) {

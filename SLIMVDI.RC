@@ -469,7 +469,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
    IDS_USAGE13,         "                  --enlarge option also set).\015\012"
    IDS_USAGE14,         "-c or --compact   Enables compaction feature (supported\015\012"
    IDS_USAGE15,         "                  guest filesystems only).\015\012"
-   IDS_USAGE16,         "-h or --help      Displays this usage information.\015\012"
+   IDS_USAGE16,         "      --nomerge   Do not merge with parents. Useful for\r\n                  compacting diff disks only.\r\n-h or --help      Displays this usage information.\015\012"
    IDS_USAGE17,         "\015\012"
    IDS_USAGE18,         "Options can be grouped, eg. -kce or --keepuuid+enlarge. Option\015\012"
    IDS_USAGE19,         "parameters should follow, in the same order as the group.\015\012"
