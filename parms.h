@@ -16,7 +16,7 @@
 #define PARM_FLAG_REPART     4 /* resize main partition to fill enlarged drive */
 #define PARM_FLAG_COMPACT    8 /* discard unused blocks from guest filesystem */
 #define PARM_FLAG_FIXMBR    16 /* flag automatically set if enlarging a VDI which starts off less than 8GB */
-#define PARM_FLAG_NOMERGE   PARM_FLAG_FIXMBR << 1 /* do not merge snapshot chain */
+#define PARM_FLAG_NOMERGE   32 /* do not merge snapshot chain */
 #define PARM_FLAG_CLIMODE   0x80000000 /* command line interface mode - errors written to stdout instead of MessageBox() */
 
 typedef struct {
