@@ -64,6 +64,8 @@ UINT VDIR_GetDriveBlockCount(HVDDR pThis, UINT SPBshift);
 UINT VDIR_AllocatedBlocks(HVDDR pThis, UINT SPBshift);
 UINT VDIR_BlockStatus(HVDDR pThis, HUGE LBA_start, HUGE LBA_end);
 BOOL VDIR_GetDriveUUID(HVDDR pThis, S_UUID *drvuuid);
+BOOL VDIR_GetDriveUUIDs(HVDDR pThis, S_UUID *uuid, S_UUID *modifyUUID);
+BOOL VDIR_GetParentUUIDs(HVDDR pThis, S_UUID *parentUUID, S_UUID *parentModifyUUID);
 BOOL VDIR_IsSnapshot(HVDDR pThis);
 /* These functions return various stats for the source VDI */
 

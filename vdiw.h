@@ -65,6 +65,9 @@ BOOL VDIW_SetDriveUUID(HANDLE hVDI, S_UUID *drvuuid);
  * on success, check GetLastError() if it returns FALSE.
  */
 
+BOOL VDIW_SetDriveUUIDs(HANDLE hVDI, S_UUID *uuid, S_UUID *modifyUUID);
+BOOL VDIW_SetParentUUIDs(HANDLE hVDI, S_UUID *parentUUID, S_UUID *parentModifyUUID);
+
 BOOL VDIW_SetFileSize(HVDIW hVDI, UINT nBlocks);
 /* This function causes the output file to be immediately extended to its expected final
  * size. This hopefully eliminates the cluster allocation overhead while writing the

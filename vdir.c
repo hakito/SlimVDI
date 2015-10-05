@@ -249,6 +249,8 @@ VDIR_Open(CPFN fn, UINT iChain)
                   pVDI->Base.GetDriveBlockCount = VDIR_GetDriveBlockCount;
                   pVDI->Base.BlockStatus        = VDIR_BlockStatus;
                   pVDI->Base.GetDriveUUID       = VDIR_GetDriveUUID;
+                  pVDI->Base.GetDriveUUIDs      = VDIR_GetDriveUUIDs;
+                  pVDI->Base.GetParentUUIDs     = VDIR_GetParentUUIDs;
                   pVDI->Base.IsSnapshot         = VDIR_IsSnapshot;
                   pVDI->Base.ReadPage           = VDIR_ReadPage;
                   pVDI->Base.ReadSectors        = VDIR_ReadSectors;
@@ -318,6 +320,36 @@ VDIR_GetDriveUUID(HVDDR pThis, S_UUID *drvuuid)
       if (pVDI->hVDIparent) return pVDI->hVDIparent->GetDriveUUID(pVDI->hVDIparent, drvuuid);
       VDDR_LastError = 0;
       Mem_Copy(drvuuid, &pVDI->hdr.uuidCreate, sizeof(S_UUID));
+      return TRUE;
+   }
+   VDDR_LastError = VDIR_ERR_INVHANDLE;
+   return 0;
+}
+
+/*.....................................................*/
+
+PUBLIC BOOL
+VDIR_GetDriveUUIDs(HVDDR pThis, S_UUID *uuid, S_UUID *modifyUUID)
+{
+   if (pThis) {
+      PVDI pVDI = (PVDI)pThis;
+      VDDR_LastError = 0;
+      Mem_Copy(uuid, &pVDI->hdr.uuidCreate, sizeof(S_UUID));
+      Mem_Copy(modifyUUID, &pVDI->hdr.uuidModify, sizeof(S_UUID));
+      return TRUE;
+   }
+   VDDR_LastError = VDIR_ERR_INVHANDLE;
+   return 0;
+}
+
+PUBLIC BOOL
+VDIR_GetParentUUIDs(HVDDR pThis, S_UUID *parentUUID, S_UUID *parentModifyUUID)
+{
+   if (pThis) {
+      PVDI pVDI = (PVDI)pThis;
+      VDDR_LastError = 0;
+      Mem_Copy(parentUUID, &pVDI->hdr.uuidLinkage, sizeof(S_UUID));
+      Mem_Copy(parentModifyUUID, &pVDI->hdr.uuidParentModify, sizeof(S_UUID));
       return TRUE;
    }
    VDDR_LastError = VDIR_ERR_INVHANDLE;

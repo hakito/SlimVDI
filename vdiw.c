@@ -289,6 +289,36 @@ VDIW_SetDriveUUID(HANDLE hVDI, S_UUID *pUUID)
 
 /*.....................................................*/
 
+PUBLIC BOOL
+VDIW_SetDriveUUIDs(HANDLE hVDI, S_UUID *uuid, S_UUID *modifyUUID)
+{
+   LastError = VDIW_ERR_HANDLE;
+   if (hVDI) {
+      PVDI pVDI = (PVDI)hVDI;
+      Mem_Copy(&pVDI->hdr.uuidCreate, uuid, sizeof(S_UUID));
+      if (modifyUUID)
+         Mem_Copy(&pVDI->hdr.uuidModify, modifyUUID, sizeof(S_UUID));
+      LastError = 0;
+   }
+   return (LastError==0);
+}
+
+PUBLIC BOOL
+VDIW_SetParentUUIDs(HANDLE hVDI, S_UUID *parentUUID, S_UUID *parentModifyUUID)
+{
+   LastError = VDIW_ERR_HANDLE;
+   if (hVDI) {
+      PVDI pVDI = (PVDI)hVDI;
+      Mem_Copy(&pVDI->hdr.uuidLinkage, parentUUID, sizeof(S_UUID));
+      if (parentModifyUUID)
+         Mem_Copy(&pVDI->hdr.uuidParentModify, parentModifyUUID, sizeof(S_UUID));
+      LastError = 0;
+   }
+   return (LastError==0);
+}
+
+/*.....................................................*/
+
 static BYTE padding[4096];
 
 static void

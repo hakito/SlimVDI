@@ -130,6 +130,9 @@ UINT PUBLIC_METHOD(BlockStatus)(HVDDR pThis, HUGE LBA_start, HUGE LBA_end);
 // read should occur (out of range LBAs should return VDDR_RSLT_NOTALLOC).
 //
 
+BOOL PUBLIC_METHOD(GetDriveUUIDs)(HVDDR pThis, S_UUID *uuid, S_UUID *modifyUUID);
+BOOL PUBLIC_METHOD(GetParentUUIDs)(HVDDR pThis, S_UUID *parentUUID, S_UUID *parentModifyUUID);
+
 BOOL PUBLIC_METHOD(GetDriveUUID)(HVDDR pThis, S_UUID *drvuuid);
 // Gets the creation UUID of the virtual drive.
 

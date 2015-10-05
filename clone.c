@@ -469,6 +469,19 @@ Clone_Proceed(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
          VDIW_SetDriveUUID(hVDIdst,&uuidCreate);
       }
 
+      if ((parm->flags & PARM_FLAG_NOMERGE) && SourceDisk->GetDriveType(SourceDisk) == VDD_TYPE_VDI) {
+         S_UUID uuidCreate, uuidModify;
+
+         if (parm->flags & PARM_FLAG_KEEPUUID) { // adopt the UUIDs from the source VDI
+            SourceDisk->GetDriveUUIDs(SourceDisk, &uuidCreate, &uuidModify);
+            VDIW_SetDriveUUIDs(hVDIdst, &uuidCreate, &uuidModify);
+         }
+
+         // adopt the parent UUIDs from the source VDI
+         SourceDisk->GetParentUUIDs(SourceDisk, &uuidCreate, &uuidModify);
+         VDIW_SetParentUUIDs(hVDIdst, &uuidCreate, &uuidModify);
+      }
+
       parm->dst_nBlocks = dst_nBlocks;
       parm->dst_nBlocksAllocated = dst_nBlocksAllocated;
       parm->nMappedParts = nMappedParts;
