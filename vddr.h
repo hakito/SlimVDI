@@ -162,6 +162,8 @@ HVDDR PUBLIC_METHOD(Close)(HVDDR pThis);
 // pointer, i.e.  P = P->Close(P).
 //
 
+BOOL PUBLIC_METHOD(IsInheritedPage)(HVDDR pThis, UINT iPage);
+
 } /* End definition */ VDDR;
 
 /*----------------------------------------------------------------------*/

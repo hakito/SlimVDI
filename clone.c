@@ -215,8 +215,11 @@ DoClone(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
 
    for (iPage=iBurst=0; iPage<nPages; iPage++) { // iPage a.k.a. block number.
 
-      if (IsBlockUsed(iPage,parm->nMappedParts)) blkstat = SourceDisk->ReadPage(SourceDisk,block,iPage,SPB_SHIFT);
-      else blkstat = VDDR_RSLT_NOTALLOC;
+      if (!SourceDisk->IsInheritedPage(SourceDisk,iPage) && IsBlockUsed(iPage,parm->nMappedParts))
+         blkstat = SourceDisk->ReadPage(SourceDisk,block,iPage,SPB_SHIFT);
+      else
+         blkstat = VDDR_RSLT_NOTALLOC;
+
       BlockStatus[iBurst] = blkstat;
       if (blkstat==VDDR_RSLT_FAIL) {
          // We could have some kind of error recovery in here: abort, or "recover and continue". The

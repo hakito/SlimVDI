@@ -94,6 +94,8 @@ HVDDR VDIR_Close(HVDDR pThis);
  * when the file was opened.
  */
 
+BOOL VDIR_IsInheritedPage(HVDDR pThis, UINT iPage);
+
 /*----------------------------------------------------------------------*/
 
 #endif
