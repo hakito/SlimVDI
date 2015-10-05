@@ -90,7 +90,6 @@ typedef struct {
 static HINSTANCE hInstApp;
 static s_CLONEPARMS parm;
 static FNCHAR tmpfn[1024];
-static BOOL bCompactOptionDefault = FALSE;
 
 /*.......................................................................*/
 
@@ -293,11 +292,7 @@ DialogProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
          CheckDlgButton(hDlg,IDD_UUID_KEEP,(parm.flags & PARM_FLAG_KEEPUUID)!=0);
          CheckDlgButton(hDlg,IDD_UUID_CHANGE,(parm.flags & PARM_FLAG_KEEPUUID)==0);
-
-         if (bCompactOptionDefault) parm.flags |= PARM_FLAG_COMPACT;
-         else parm.flags &= (~PARM_FLAG_COMPACT);
          CheckDlgButton(hDlg,IDD_COMPACT,(parm.flags & PARM_FLAG_COMPACT)!=0);
-
          CheckDlgButton(hDlg,IDD_NOMERGE,(parm.flags & PARM_FLAG_NOMERGE)!=0);
 
          if (parm.srcfn[0]) {
@@ -450,11 +445,10 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int nCmdSh
       MSG  msg;
       int status;
       
-      parm.flags = 0;
+      parm.flags = PARM_FLAG_KEEPUUID | PARM_FLAG_COMPACT | PARM_FLAG_NOMERGE;
       parm.hVDIsrc = NULL;
       Profile_GetString(szSrcFileName,parm.srcfn,MAX_PATH,"");
       Profile_GetString(szDstFileName,parm.dstfn,MAX_PATH,"");
-      bCompactOptionDefault = (Profile_GetOption("Compact")!=0);
 
       HexView_RegisterClass(hInstance);
 
