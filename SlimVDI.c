@@ -398,8 +398,8 @@ DialogProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
                   }
                   break;
                case IDD_BTN_EXIT: {
-                  Profile_SetString(szSrcFileName,parm.srcfn);
-                  Profile_SetString(szDstFileName,parm.dstfn);
+                  //Profile_SetString(szSrcFileName,parm.srcfn);
+                  //Profile_SetString(szDstFileName,parm.dstfn);
                   DestroyWindow(hDlg);
                   break;
                }
