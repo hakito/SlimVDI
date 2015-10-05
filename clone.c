@@ -168,9 +168,8 @@ CountUsedBlocks(UINT nMappedParts, UINT dst_nBlocks, BOOL nomerge)
    HUGE LBA = 0;
 
    for (iPage=0; iPage<dst_nBlocks; iPage++) {
-	  if (nomerge && SourceDisk->IsInheritedPage(SourceDisk, iPage))
-		  continue;
-      blkstat = SourceDisk->BlockStatus(SourceDisk,LBA,LBA+(SECTORS_PER_BLOCK-1));
+      blkstat = (nomerge && SourceDisk->IsInheritedPage(SourceDisk, iPage) ? VDDR_RSLT_NOTALLOC
+                 : SourceDisk->BlockStatus(SourceDisk,LBA,LBA+(SECTORS_PER_BLOCK-1)));
       LBA += (SECTORS_PER_BLOCK);
       if (blkstat==VDDR_RSLT_NORMAL) {
          if (IsBlockUsed(iPage,nMappedParts)) nUsedBlocks++;
@@ -217,7 +216,7 @@ DoClone(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
 
    for (iPage=iBurst=0; iPage<nPages; iPage++) { // iPage a.k.a. block number.
 
-	  blkstat = VDDR_RSLT_NOTALLOC;
+      blkstat = VDDR_RSLT_NOTALLOC;
       if (!((parm->flags & PARM_FLAG_NOMERGE) && SourceDisk->IsInheritedPage(SourceDisk, iPage)) && IsBlockUsed(iPage, parm->nMappedParts))
          blkstat = SourceDisk->ReadPage(SourceDisk,block,iPage,SPB_SHIFT);
 
