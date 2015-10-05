@@ -16,6 +16,7 @@ typedef struct {
    double StartTime;   // progress module updates this (app should ignore).
    BOOL bUserCancel;   // Either the app or the progress module can set this.
    int  old_pcent;     // app should ignore this.
+   BOOL bPrintToConsole;
 } ProgInfo, *PPROGINF;
 
 /*

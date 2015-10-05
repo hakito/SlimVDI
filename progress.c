@@ -14,6 +14,7 @@
 #include "thermo.h"
 #include "env.h"
 #include "ids.h"
+#include "djfile.h"
 
 #define IDD_THERMO        200
 #define IDD_FILENAME      201
@@ -101,7 +102,7 @@ Progress_Begin(HINSTANCE hInstRes, HWND hWndOwner, PPROGINF pProg)
    pProg->StartTime = GetCurrentTimeInSeconds();
    pProg->bUserCancel = FALSE;
 
-   if (!hWndProgress) {
+   if (!pProg->bPrintToConsole && !hWndProgress) {
       while (YieldCPU());
       hWndProgress = CreateDialogParam(hInstRes,RSTR(DLG_ALT_PROGRESS),hWndOwner,ProgressDlgProc,(LPARAM)pProg);
       if (hWndProgress) SetWindowText(hWndProgress, pProg->pszCaption);
@@ -169,6 +170,24 @@ ShowTime(HWND hWnd, UINT idCtl, double t)
 static void
 Progress_UpdateStats(PPROGINF pProg)
 {
+   if (pProg->bPrintToConsole) {
+      int pcent = (pProg->BytesTotal <= 1 ? 100 : (int)((pProg->BytesDone * 100.0 / pProg->BytesTotal) + 0.5));
+      int deltaPcent = pcent - pProg->old_pcent;
+      if (deltaPcent > 0) {
+         FILE stdout = GetStdHandle(STD_OUTPUT_HANDLE);
+         if (stdout) {
+            char sz[128];
+            for (int i = 0; i < deltaPcent; ++i)
+               sz[i] = '.';
+            sz[deltaPcent] = 0;
+
+            File_WrBin(stdout, sz, deltaPcent);
+         }
+      }
+      pProg->old_pcent = pcent;
+      return;
+   }
+
    if (hWndProgress) {
       double BytesLeft = pProg->BytesTotal-pProg->BytesDone;
       char sz[64];
@@ -215,6 +234,12 @@ Progress_UpdateStats(PPROGINF pProg)
 static void
 Progress_End(PPROGINF pProg)
 {
+   if (pProg->bPrintToConsole) {
+      FILE stdout = GetStdHandle(STD_OUTPUT_HANDLE);
+      if (stdout) File_WrBin(stdout, "\r\n", 2);
+      return;
+   }
+
    if (hWndProgress) {
       DestroyWindow(hWndProgress);
       hWndProgress = 0;

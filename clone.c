@@ -205,6 +205,7 @@ DoClone(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
    prog.pszMsg = RSTR(CLONEWAIT);
    prog.pszCaption = RSTR(CLONINGVHD);
    prog.BytesTotal = parm->dst_nBlocksAllocated*(1.0*BLOCK_SIZE);
+   prog.bPrintToConsole = (parm->flags & PARM_FLAG_CLIMODE);
    Progress.Begin(hInstRes, hWndParent, &prog);
    Progress.UpdateStats(&prog);
 
