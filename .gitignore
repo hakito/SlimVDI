@@ -32,3 +32,4 @@ Debug/
 *.pdb
 *.sdf
 *.opensdf
+Obj/
