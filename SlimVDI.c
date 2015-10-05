@@ -79,6 +79,7 @@ typedef struct {
 #define IDD_NEW_SIZE          210
 #define IDD_INCREASE_PARTSIZE 211
 #define IDD_COMPACT           212
+#define IDD_NOMERGE           214
 #define IDD_ABOUT_TEXT        213
 #define IDD_BTN_PARTINFO      300
 #define IDD_BTN_HDRINFO       301
@@ -244,6 +245,7 @@ OpenNewSource(HWND hDlg, BOOL bRefreshDlg)
    if (IsDlgButtonChecked(hDlg,IDD_UUID_KEEP)) parm.flags |= PARM_FLAG_KEEPUUID;
    if (IsDlgButtonChecked(hDlg,IDD_INCREASE_SIZE)) parm.flags |= PARM_FLAG_ENLARGE;
    if (IsDlgButtonChecked(hDlg,IDD_COMPACT)) parm.flags |= PARM_FLAG_COMPACT;
+   if (IsDlgButtonChecked(hDlg,IDD_NOMERGE)) parm.flags |= PARM_FLAG_NOMERGE;
 }
 
 /*....................................................*/
@@ -295,6 +297,8 @@ DialogProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
          if (bCompactOptionDefault) parm.flags |= PARM_FLAG_COMPACT;
          else parm.flags &= (~PARM_FLAG_COMPACT);
          CheckDlgButton(hDlg,IDD_COMPACT,(parm.flags & PARM_FLAG_COMPACT)!=0);
+
+         CheckDlgButton(hDlg,IDD_NOMERGE,(parm.flags & PARM_FLAG_NOMERGE)!=0);
 
          if (parm.srcfn[0]) {
             OpenNewSource(hDlg,TRUE);
@@ -360,6 +364,10 @@ DialogProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
                case IDD_COMPACT:
                   parm.flags &= (~PARM_FLAG_COMPACT);
                   if (IsDlgButtonChecked(hDlg,idCtl)) parm.flags |= PARM_FLAG_COMPACT;
+                  break;
+               case IDD_NOMERGE:
+                  parm.flags &= (~PARM_FLAG_NOMERGE);
+                  if (IsDlgButtonChecked(hDlg,idCtl)) parm.flags |= PARM_FLAG_NOMERGE;
                   break;
                case IDD_BTN_PARTINFO:
                   if (parm.hVDIsrc) {

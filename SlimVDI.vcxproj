@@ -118,6 +118,7 @@
     <ClInclude Include="profile.h" />
     <ClInclude Include="progress.h" />
     <ClInclude Include="random.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SectorViewer.h" />
     <ClInclude Include="showheader.h" />
     <ClInclude Include="thermo.h" />
@@ -175,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="SlimVDI.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\SlimVDI.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
