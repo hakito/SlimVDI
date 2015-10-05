@@ -3,6 +3,12 @@
 This is a fork of CloneVDI (written by Don Mile) that has been renamed to SlimVDI according to the license of CloneVDI.
 This readme is based on the "release notes.txt" of CloneVDI and has been updated for SlimVDI and markdown syntax.
 
+## Main differences to CloneVDI
+
+* Support of removing unused blocks for diff images (without merging with base images)
+* Work with diff images inf command line mode
+* Real headless command line mode (without showing a progress dialog)
+
 PLEASE READ THIS DOCUMENT CAREFULLY, IT SHOULD CONTAIN ANSWERS TO MOST QUESTIONS.
 
 **Intended audience:** users of Oracle's "VirtualBox", a Virtual Machine application.
@@ -96,9 +102,7 @@ FAQ
 ### Can it clone VDIs with snapshots?
    Yes, SlimVDI has the ability to clone a snapshot VDI (the .VDI files with the strange
    names that live in your \<VM>\Snapshots folder). It will follow the chain of dependencies back
-   to the base VDI and then create a clone which includes all the data from the point in time
-   represented by the snapshot.  However this feature only works with VirtualBox native (VDI)
-   snapshots. Support for cloning snapshots in other formats than VMDK and VHD are not supported.
+   to the base VDI and then create a clone (optionally merged with base images). However this feature only works with VirtualBox native (VDI) snapshots. Support for cloning snapshots in other formats than VMDK and VHD are not supported.
 
 ### What is this UUID thing that the dialog box mentions?
    Simply put, the header of every VDI file includes an identifying number, called a UUID, which
