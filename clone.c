@@ -218,7 +218,7 @@ DoClone(HINSTANCE hInstRes, HWND hWndParent, s_CLONEPARMS *parm)
    for (iPage=iBurst=0; iPage<nPages; iPage++) { // iPage a.k.a. block number.
 
 	  blkstat = VDDR_RSLT_NOTALLOC;
-	  if (!(parm->flags & PARM_FLAG_NOMERGE && SourceDisk->IsInheritedPage(SourceDisk, iPage)) && IsBlockUsed(iPage, parm->nMappedParts))
+      if (!((parm->flags & PARM_FLAG_NOMERGE) && SourceDisk->IsInheritedPage(SourceDisk, iPage)) && IsBlockUsed(iPage, parm->nMappedParts))
          blkstat = SourceDisk->ReadPage(SourceDisk,block,iPage,SPB_SHIFT);
 
       BlockStatus[iBurst] = blkstat;
