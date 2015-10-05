@@ -491,7 +491,6 @@ VDIR_IsSnapshot(HVDDR pThis)
    if (pThis) {
       PVDI pVDI = (PVDI)pThis;
       VDDR_LastError = 0;
-      if (pVDI->hVDIparent) return FALSE; // if we've already resolved the snapshot then don't alarm the app...
       if (IsNullUUID(&pVDI->hdr.uuidParentModify)) return FALSE;
       if (IsNullUUID(&pVDI->hdr.uuidLinkage)) return FALSE;
    }
