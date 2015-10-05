@@ -89,8 +89,7 @@ FAQ
    if they are done as clones.
 
 ### Will it corrupt my virtual disks?
-   I don't see how. SlimVDI does not modify the original file (it always makes a copy, then
-   modifies the copy), so you can always revert back to the original provided you haven't deleted
+   SlimVDI creates a copy of the original file, so you can always revert back to the original provided you haven't deleted
    it. If you do intend to delete the original then I suggest that you use the clone for a while
    first, to make sure that everything is stable.
 
@@ -126,9 +125,8 @@ a source file <filename> then this field defaults to "Clone of <filename>". The 
 is forced to "VDI", since SlimVDI currently cannot write other formats.
 
 NOTE: it is perfectly ok for the source and destination path\filenames to be the same. In
-that case the tool will first write the clone to a temporary file. Then, if all goes well it will
-clean up by renaming the old file to "Original <filename>", then rename the new file to
-<filename>. If you do this then you probably also want to use the option to keep the old UUID,
+that case the tool will create a backup of the original file.
+If you do this then you probably also want to use the option to keep the old UUID,
 that way VirtualBox Media Manager should not notice the change. [ Obviously this does not apply
 when converting VHD,VMDK or RAW, since the output filename will always have a VDI extension,
 hence the filenames can never match ].
@@ -376,7 +374,7 @@ You should bear in mind that the Command Line Interface (CLI) feature is just a 
 access the features of SlimVDI, the features themselves still work in the same way. For example,
 it is legal to make source and destination filenames exactly the same, this would be handled
 exactly as if you had filled the dialog box in the same way, i.e. you will end up with a clone
-with the selected name, and the original file renamed to "Original "+<filename>.
+with the selected name, and the original file renamed to "Original of "+<filename>.
 	
 SlimVDI is an example of a "dual mode" console/GUI application. This presents a small problem when
 running from the Windows command console: the console expects an application to be /either/ a GUI
